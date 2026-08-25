@@ -690,15 +690,11 @@ class Pipeline:
             ]
 
         if record_kind == "PRODUCT":
-            product_name = self._clean_string(
-                raw.get("product_name")
-                or raw.get("name")
-            )
             startup_name = self._clean_string(
                 raw.get("startup_name")
             )
 
-            if not product_name or not startup_name:
+            if not startup_name:
                 return []
 
             return [
