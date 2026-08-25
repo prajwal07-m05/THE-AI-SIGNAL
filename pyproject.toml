@@ -1,0 +1,18 @@
+[project]
+name = "frontier-intel-pipeline"
+version = "1.0.0"
+description = "Fault-tolerant, concurrent AI-ecosystem ingestion pipeline with multi-tier LLM extraction and deterministic entity resolution."
+requires-python = ">=3.11"
+readme = "README.md"
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+testpaths = ["tests"]
+pythonpath = ["."]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B", "ASYNC"]
