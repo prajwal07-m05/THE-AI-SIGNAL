@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+from datetime import datetime, timezone
+
 import httpx
 import pytest
 
@@ -16,13 +18,61 @@ def test_parse_retry_after_seconds():
     assert _parse_retry_after("5") == 5.0
 
 
+def test_parse_retry_after_negative_seconds():
+    assert _parse_retry_after("-5") == 0.0
+
+
 def test_parse_retry_after_empty_value():
     assert _parse_retry_after(None) is None
     assert _parse_retry_after("") is None
 
 
 def test_parse_retry_after_invalid_value():
-    assert _parse_retry_after("not-a-number") is None
+    assert _parse_retry_after(
+        "not-a-number"
+    ) is None
+
+
+def test_parse_retry_after_http_date():
+    now = datetime(
+        2026,
+        8,
+        25,
+        12,
+        0,
+        0,
+        tzinfo=timezone.utc,
+    )
+
+    retry_after = (
+        "Tue, 25 Aug 2026 12:00:05 GMT"
+    )
+
+    assert _parse_retry_after(
+        retry_after,
+        now=now,
+    ) == 5.0
+
+
+def test_parse_retry_after_past_http_date():
+    now = datetime(
+        2026,
+        8,
+        25,
+        12,
+        0,
+        10,
+        tzinfo=timezone.utc,
+    )
+
+    retry_after = (
+        "Tue, 25 Aug 2026 12:00:05 GMT"
+    )
+
+    assert _parse_retry_after(
+        retry_after,
+        now=now,
+    ) == 0.0
 
 
 @pytest.mark.asyncio
@@ -89,7 +139,6 @@ async def test_get_retries_on_500(monkeypatch):
             mock_get,
         )
 
-        # Avoid waiting for real exponential backoff in unit tests.
         monkeypatch.setattr(
             "src.core.http_client.asyncio.sleep",
             _no_sleep,
@@ -233,7 +282,9 @@ async def test_get_raises_after_retry_exhaustion(
             _no_sleep,
         )
 
-        with pytest.raises(RetryableHTTPError):
+        with pytest.raises(
+            RetryableHTTPError
+        ):
             await fetcher.get(
                 "https://example.com"
             )
@@ -247,9 +298,15 @@ async def test_post_json_success(monkeypatch):
         assert fetcher._client is not None
 
         async def mock_post(*args, **kwargs):
-            assert kwargs["content"] == '{"query":"ai"}'
             assert (
-                kwargs["headers"]["Content-Type"]
+                kwargs["content"]
+                == '{"query":"ai"}'
+            )
+
+            assert (
+                kwargs["headers"][
+                    "Content-Type"
+                ]
                 == "application/json"
             )
 
@@ -284,6 +341,9 @@ async def test_post_json_success(monkeypatch):
         }
 
 
-async def _no_sleep(*args, **kwargs):
+async def _no_sleep(
+    *args,
+    **kwargs,
+):
     """Replace retry sleeps during unit tests."""
     return None
