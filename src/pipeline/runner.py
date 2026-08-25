@@ -49,6 +49,7 @@ from src.models.schemas import (
 )
 from src.resolver.entity_resolver import EntityResolver
 from src.scrapers.arxiv_scraper import ArxivScraper
+from src.scrapers.github_metrics import fetch_stars, find_repo
 from src.scrapers.jobs_scraper import JobsScraper
 from src.scrapers.news_scraper import NewsScraper
 from src.scrapers.startups_scraper import StartupScraper
@@ -500,9 +501,25 @@ class Pipeline:
             raw.get("published_date")
         )
 
-        github_url = self._find_github_url(
-            raw.get("candidate_links")
-        )
+        candidate_links = raw.get("candidate_links")
+        if not isinstance(candidate_links, list):
+            candidate_links = []
+
+        abstract = self._clean_string(raw.get("abstract")) or ""
+        repo = find_repo(candidate_links, abstract)
+
+        github_url: str | None = None
+        github_stars: int | None = None
+
+        if repo and self.fetcher is not None:
+            github_metrics = await fetch_stars(
+                self.fetcher,
+                repo[0],
+                repo[1],
+            )
+            if github_metrics:
+                github_url = github_metrics.get("github_url")
+                github_stars = github_metrics.get("github_stars")
 
         return [
             (
@@ -520,7 +537,7 @@ class Pipeline:
                         ),
                         "paper_url": source_url,
                         "github_url": github_url,
-                        "github_stars": None,
+                        "github_stars": github_stars,
                         "published_date": published,
                     },
                 },
@@ -983,24 +1000,6 @@ class Pipeline:
         return dt.astimezone(
             timezone.utc
         )
-
-    @staticmethod
-    def _find_github_url(
-        links: Any,
-    ) -> str | None:
-        if not isinstance(links, list):
-            return None
-
-        for link in links:
-            if not isinstance(link, str):
-                continue
-
-            candidate = link.strip()
-
-            if "github.com/" in candidate.lower():
-                return candidate
-
-        return None
 
     @staticmethod
     def _parse_pricing_model(
