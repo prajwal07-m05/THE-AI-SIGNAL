@@ -6,7 +6,13 @@ research_papers:
   - name: arXiv
     type: api
     endpoint: http://export.arxiv.org/api/query
-    categories: [cs.AI, cs.LG, cs.CL, cs.CV, stat.ML]
+    categories:
+      - cs.AI
+      - cs.LG
+      - cs.CL
+      - cs.CV
+      - stat.ML
+
   - name: Papers with Code
     type: api
     endpoint: https://paperswithcode.com/api/v1/papers/
@@ -18,18 +24,48 @@ startups_products:
     index: YCCompany_production
     note: public search-only key; paginate hitsPerPage=1000
 
-news:  # Phase II — 5 distinct sources
-  - { name: Hacker News, type: api, endpoint: https://hn.algolia.com/api/v1/search_by_date }
-  - { name: MIT Technology Review, type: rss, endpoint: https://www.technologyreview.com/topic/artificial-intelligence/feed }
-  - { name: VentureBeat, type: rss, endpoint: https://venturebeat.com/category/ai/feed/ }
-  - { name: TechCrunch, type: rss, endpoint: https://techcrunch.com/category/artificial-intelligence/feed/ }
-  - { name: The Verge, type: rss, endpoint: https://www.theverge.com/rss/ai-artificial-intelligence/index.xml }
+news:
+  # Phase II — 5 distinct sources
+  - name: Hacker News
+    type: api
+    endpoint: https://hn.algolia.com/api/v1/search_by_date
 
-jobs:  # Phase II — 5 job boards
-  - { name: Remotive, type: api, endpoint: https://remotive.com/api/remote-jobs }
-  - { name: RemoteOK, type: api, endpoint: https://remoteok.com/api }
-  - { name: Arbeitnow, type: api, endpoint: https://www.arbeitnow.com/api/job-board-api }
-  - { name: Hacker News Hiring, type: api, endpoint: https://hn.algolia.com/api/v1/search }
-  - { name: Greenhouse boards, type: api, endpoint: https://boards-api.greenhouse.io/v1/boards/{company}/jobs }
+  - name: MIT Technology Review
+    type: rss
+    endpoint: https://www.technologyreview.com/topic/artificial-intelligence/feed
+
+  - name: VentureBeat
+    type: rss
+    endpoint: https://venturebeat.com/category/ai/feed/
+
+  - name: TechCrunch
+    type: rss
+    endpoint: https://techcrunch.com/category/artificial-intelligence/feed/
+
+  - name: The Verge
+    type: rss
+    endpoint: https://www.theverge.com/rss/ai-artificial-intelligence/index.xml
+
+jobs:
+  # Phase II — 5 job boards
+  - name: Remotive
+    type: api
+    endpoint: https://remotive.com/api/remote-jobs
+
+  - name: RemoteOK
+    type: api
+    endpoint: https://remoteok.com/api
+
+  - name: Arbeitnow
+    type: api
+    endpoint: https://www.arbeitnow.com/api/job-board-api
+
+  - name: Hacker News Hiring
+    type: api
+    endpoint: https://hn.algolia.com/api/v1/search
+
+  - name: Greenhouse boards
+    type: api
+    endpoint: "https://boards-api.greenhouse.io/v1/boards/{company}/jobs"
 
 freshness_window_hours: 24
