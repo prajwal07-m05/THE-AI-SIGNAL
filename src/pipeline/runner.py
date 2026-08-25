@@ -6,11 +6,15 @@ vertical. The pipeline owns the processing boundary:
     scraper
         -> provenance validation
         -> freshness filtering
-        -> deduplication
+        -> deduplication claim
         -> optional LLM enrichment
         -> entity resolution
         -> Pydantic validation
         -> output bucket
+
+A deduplication claim is retained only after successful processing. Any
+failure after the claim is released so transient downstream failures can be
+retried safely on a later run.
 
 Scrapers remain source-specific and emit raw dictionaries. This module keeps
 the rest of the system source-agnostic.
@@ -109,13 +113,13 @@ class Pipeline:
             "llm_failed": 0,
             "missing_provenance": 0,
             "normalization_failed": 0,
+            "dedupe_release_failed": 0,
             "by_type": {
                 key: {
                     "seen": 0,
                     "accepted": 0,
                     "duplicates": 0,
                     "stale": 0,
-                    "invalid": 0,
                     "quarantined": 0,
                 }
                 for key in self.OUTPUT_KEYS
@@ -133,7 +137,6 @@ class Pipeline:
     ) -> None:
         """Run the research-paper vertical."""
         active_fetcher = self._resolve_fetcher(fetcher)
-
         scraper = ArxivScraper(active_fetcher)
 
         await self._consume(
@@ -148,7 +151,6 @@ class Pipeline:
     ) -> None:
         """Run the startup/product vertical."""
         active_fetcher = self._resolve_fetcher(fetcher)
-
         scraper = StartupScraper(active_fetcher)
 
         await self._consume(
@@ -163,7 +165,6 @@ class Pipeline:
     ) -> None:
         """Run the news vertical."""
         active_fetcher = self._resolve_fetcher(fetcher)
-
         scraper = NewsScraper(active_fetcher)
 
         await self._consume(
@@ -178,7 +179,6 @@ class Pipeline:
     ) -> None:
         """Run the jobs vertical."""
         active_fetcher = self._resolve_fetcher(fetcher)
-
         scraper = JobsScraper(active_fetcher)
 
         await self._consume(
@@ -285,7 +285,6 @@ class Pipeline:
         source_name = self._clean_string(
             source.get("name")
         )
-
         source_url = self._clean_string(
             source.get("url")
         )
@@ -332,66 +331,149 @@ class Pipeline:
             self.stats["by_type"][record_type]["duplicates"] += 1
             return
 
-        if self.use_llm and self.llm is not None:
+        # From this point onward, the identity has been claimed.
+        #
+        # Any downstream failure must release that claim. Otherwise a
+        # transient LLM/network/validation failure permanently turns a
+        # retryable record into a duplicate.
+        try:
+            if self.use_llm and self.llm is not None:
+                try:
+                    await self._apply_llm(
+                        record_type,
+                        record,
+                    )
+
+                    self.stats["llm_enriched"] += 1
+
+                except AllProvidersFailed as exc:
+                    self.stats["llm_failed"] += 1
+
+                    self._quarantine(
+                        record_type,
+                        record,
+                        "llm_failed",
+                        str(exc),
+                    )
+
+                    self._release_claim(
+                        identity,
+                        record_type,
+                    )
+                    return
+
+                except Exception as exc:  # noqa: BLE001
+                    self.stats["llm_failed"] += 1
+
+                    self._quarantine(
+                        record_type,
+                        record,
+                        "llm_error",
+                        str(exc),
+                    )
+
+                    self._release_claim(
+                        identity,
+                        record_type,
+                    )
+                    return
+
             try:
-                await self._apply_llm(
+                self._resolve_entities(
                     record_type,
                     record,
                 )
-
-                self.stats["llm_enriched"] += 1
-
-            except AllProvidersFailed as exc:
-                self.stats["llm_failed"] += 1
-
-                self._quarantine(
-                    record_type,
-                    record,
-                    "llm_failed",
-                    str(exc),
-                )
-                return
 
             except Exception as exc:  # noqa: BLE001
-                self.stats["llm_failed"] += 1
+                self._quarantine(
+                    record_type,
+                    record,
+                    "entity_resolution_error",
+                    str(exc),
+                )
+
+                self._release_claim(
+                    identity,
+                    record_type,
+                )
+                return
+
+            try:
+                validated = self._validate(
+                    record_type,
+                    record,
+                )
+
+            except ValidationError as exc:
+                self.stats["invalid"] += 1
 
                 self._quarantine(
                     record_type,
                     record,
-                    "llm_error",
+                    "schema_validation_failed",
                     str(exc),
+                )
+
+                self._release_claim(
+                    identity,
+                    record_type,
                 )
                 return
 
-        self._resolve_entities(
-            record_type,
-            record,
-        )
-
-        try:
-            validated = self._validate(
-                record_type,
-                record,
+            self.output[record_type].append(
+                validated
             )
 
-        except ValidationError as exc:
-            self.stats["invalid"] += 1
-            self.stats["by_type"][record_type]["invalid"] += 1
+            self.stats["accepted"] += 1
+            self.stats["by_type"][record_type]["accepted"] += 1
+
+            # Successful processing intentionally keeps the claim.
+            log.debug(
+                "dedupe_claim_committed",
+                record_type=record_type,
+                identity=identity,
+            )
+
+        except Exception as exc:  # noqa: BLE001
+            # Last-resort safety boundary. No unexpected exception after a
+            # successful claim should leave the record permanently poisoned.
+            self._release_claim(
+                identity,
+                record_type,
+            )
 
             self._quarantine(
                 record_type,
                 record,
-                "schema_validation_failed",
+                "processing_error",
                 str(exc),
             )
-            return
 
-        self.output[record_type].append(
-            validated
-        )
+    def _release_claim(
+        self,
+        identity: str,
+        record_type: str,
+    ) -> None:
+        """Release a claim and record failures without masking the root error."""
+        try:
+            released = self.dedupe.release(identity)
 
-        self.stats["accepted"] += 1
-        self.stats["by_type"][record_type]["accepted"] += 1
+            if not released:
+                log.warning(
+                    "dedupe_claim_release_missing",
+                    record_type=record_type,
+                    identity=identity,
+                )
+
+        except Exception as exc:  # noqa: BLE001
+            self.stats["dedupe_release_failed"] += 1
+
+            log.error(
+                "dedupe_claim_release_failed",
+                record_type=record_type,
+                identity=identity,
+                error=str(exc),
+            )
 
     # ------------------------------------------------------------------
     # Normalization
@@ -404,11 +486,9 @@ class Pipeline:
         title = self._clean_string(
             raw.get("title")
         )
-
         source_name = self._clean_string(
             raw.get("source_name")
         )
-
         source_url = self._clean_string(
             raw.get("source_url")
         )
@@ -454,11 +534,9 @@ class Pipeline:
         title = self._clean_string(
             raw.get("title")
         )
-
         source_name = self._clean_string(
             raw.get("source_name")
         )
-
         source_url = self._clean_string(
             raw.get("source_url")
         )
@@ -498,15 +576,12 @@ class Pipeline:
         title = self._clean_string(
             raw.get("title")
         )
-
         company = self._clean_string(
             raw.get("company")
         )
-
         source_name = self._clean_string(
             raw.get("source_name")
         )
-
         source_url = self._clean_string(
             raw.get("source_url")
         )
@@ -549,11 +624,9 @@ class Pipeline:
         record_kind = self._clean_string(
             raw.get("record_kind")
         )
-
         source_name = self._clean_string(
             raw.get("source_name")
         )
-
         source_url = self._clean_string(
             raw.get("source_url")
         )
@@ -575,7 +648,6 @@ class Pipeline:
                 return []
 
             employee_count: int | None = None
-
             team_size = raw.get("team_size")
 
             if team_size is not None:
@@ -605,7 +677,6 @@ class Pipeline:
                 raw.get("product_name")
                 or raw.get("name")
             )
-
             startup_name = self._clean_string(
                 raw.get("startup_name")
             )

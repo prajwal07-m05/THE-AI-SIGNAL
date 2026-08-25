@@ -1,5 +1,7 @@
 """Persistent deduplication ledger tests."""
 
+from __future__ import annotations
+
 from pathlib import Path
 
 from src.core.dedupe import DedupeLedger, _fingerprint
@@ -13,13 +15,9 @@ def test_fingerprint_normalizes_identity():
     )
 
 
-def test_identity_is_claimed_only_once(
-    tmp_path: Path,
-):
+def test_identity_is_claimed_only_once(tmp_path: Path):
     ledger = DedupeLedger(
-        sqlite_path=str(
-            tmp_path / "ledger.sqlite"
-        )
+        sqlite_path=str(tmp_path / "ledger.sqlite")
     )
 
     identity = "https://example.com/article"
@@ -30,13 +28,9 @@ def test_identity_is_claimed_only_once(
     ledger.close()
 
 
-def test_first_seen_is_recorded(
-    tmp_path: Path,
-):
+def test_first_seen_is_recorded(tmp_path: Path):
     ledger = DedupeLedger(
-        sqlite_path=str(
-            tmp_path / "ledger.sqlite"
-        )
+        sqlite_path=str(tmp_path / "ledger.sqlite")
     )
 
     identity = "https://example.com/paper"
@@ -53,9 +47,7 @@ def test_first_seen_is_recorded(
     ledger.close()
 
 
-def test_deduplication_persists_across_instances(
-    tmp_path: Path,
-):
+def test_deduplication_persists_across_instances(tmp_path: Path):
     ledger_path = str(
         tmp_path / "persistent.sqlite"
     )
@@ -79,13 +71,9 @@ def test_deduplication_persists_across_instances(
     second.close()
 
 
-def test_different_identities_are_independent(
-    tmp_path: Path,
-):
+def test_different_identities_are_independent(tmp_path: Path):
     ledger = DedupeLedger(
-        sqlite_path=str(
-            tmp_path / "ledger.sqlite"
-        )
+        sqlite_path=str(tmp_path / "ledger.sqlite")
     )
 
     assert ledger.is_new(
@@ -98,6 +86,38 @@ def test_different_identities_are_independent(
 
     assert ledger.is_new(
         "https://example.com/a"
+    ) is False
+
+    ledger.close()
+
+
+def test_release_allows_failed_record_to_be_reprocessed(
+    tmp_path: Path,
+):
+    ledger = DedupeLedger(
+        sqlite_path=str(tmp_path / "ledger.sqlite")
+    )
+
+    identity = "https://example.com/retryable"
+
+    assert ledger.is_new(identity) is True
+
+    assert ledger.release(identity) is True
+
+    assert ledger.first_seen(identity) is None
+
+    assert ledger.is_new(identity) is True
+
+    ledger.close()
+
+
+def test_release_unknown_identity_is_safe(tmp_path: Path):
+    ledger = DedupeLedger(
+        sqlite_path=str(tmp_path / "ledger.sqlite")
+    )
+
+    assert ledger.release(
+        "https://example.com/never-claimed"
     ) is False
 
     ledger.close()
