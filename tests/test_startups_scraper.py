@@ -17,7 +17,13 @@ class FakeFetcher:
         self.calls: list[tuple[str, str, dict]] = []
 
     async def post_json(self, url, body, headers=None):
-        self.calls.append((url, body, headers or {}))
+        self.calls.append(
+            (
+                url,
+                body,
+                headers or {},
+            )
+        )
         return self.responses.pop(0)
 
 
@@ -46,6 +52,21 @@ def _registry(tmp_path: Path) -> SourceRegistry:
     return SourceRegistry(path)
 
 
+def _scraper(
+    tmp_path: Path,
+    responses: list[dict],
+) -> tuple[StartupScraper, FakeFetcher]:
+    fetcher = FakeFetcher(responses)
+
+    scraper = StartupScraper(
+        fetcher,
+        registry=_registry(tmp_path),
+        algolia_api_key="test-algolia-api-key",
+    )
+
+    return scraper, fetcher
+
+
 def _hit(
     *,
     name: str = "Example AI",
@@ -65,15 +86,15 @@ def _hit(
 async def test_yc_scraper_uses_configured_algolia_index(
     tmp_path: Path,
 ):
-    fetcher = FakeFetcher(
+    scraper, fetcher = _scraper(
+        tmp_path,
         [
-            {"hits": [_hit()]},
-        ]
-    )
-
-    scraper = StartupScraper(
-        fetcher,
-        registry=_registry(tmp_path),
+            {
+                "hits": [
+                    _hit(),
+                ]
+            },
+        ],
     )
 
     records = [
@@ -82,6 +103,7 @@ async def test_yc_scraper_uses_configured_algolia_index(
     ]
 
     assert len(records) == 2
+    assert len(fetcher.calls) == 1
 
     url, body, headers = fetcher.calls[0]
 
@@ -92,28 +114,37 @@ async def test_yc_scraper_uses_configured_algolia_index(
     )
 
     assert '"query": ""' in body
-    assert '"hitsPerPage": 1000' in body
+    assert '"hitsPerPage": 1' in body
     assert '"page": 0' in body
     assert '"attributesToRetrieve": ["*"]' in body
 
-    assert headers["X-Algolia-Application-Id"] == "45BWZJ1SGC"
-    assert headers["X-Algolia-API-Key"]
-    assert headers["Content-Type"] == "application/json"
+    assert (
+        headers["X-Algolia-Application-Id"]
+        == "45BWZJ1SGC"
+    )
+    assert (
+        headers["X-Algolia-API-Key"]
+        == "test-algolia-api-key"
+    )
+    assert (
+        headers["Content-Type"]
+        == "application/json"
+    )
 
 
 @pytest.mark.asyncio
 async def test_yc_scraper_emits_startup_and_product(
     tmp_path: Path,
 ):
-    fetcher = FakeFetcher(
+    scraper, _ = _scraper(
+        tmp_path,
         [
-            {"hits": [_hit()]},
-        ]
-    )
-
-    scraper = StartupScraper(
-        fetcher,
-        registry=_registry(tmp_path),
+            {
+                "hits": [
+                    _hit(),
+                ]
+            },
+        ],
     )
 
     records = [
@@ -152,7 +183,8 @@ async def test_yc_scraper_emits_startup_and_product(
 async def test_yc_scraper_respects_limit(
     tmp_path: Path,
 ):
-    fetcher = FakeFetcher(
+    scraper, fetcher = _scraper(
+        tmp_path,
         [
             {
                 "hits": [
@@ -165,13 +197,8 @@ async def test_yc_scraper_respects_limit(
                         slug="second-ai",
                     ),
                 ]
-            }
-        ]
-    )
-
-    scraper = StartupScraper(
-        fetcher,
-        registry=_registry(tmp_path),
+            },
+        ],
     )
 
     records = [
@@ -183,12 +210,19 @@ async def test_yc_scraper_respects_limit(
     assert records[0]["name"] == "First AI"
     assert records[1]["startup_name"] == "First AI"
 
+    assert len(fetcher.calls) == 1
+
+    _, body, _ = fetcher.calls[0]
+
+    assert '"hitsPerPage": 1' in body
+
 
 @pytest.mark.asyncio
 async def test_yc_scraper_skips_hits_without_identity(
     tmp_path: Path,
 ):
-    fetcher = FakeFetcher(
+    scraper, _ = _scraper(
+        tmp_path,
         [
             {
                 "hits": [
@@ -198,13 +232,8 @@ async def test_yc_scraper_skips_hits_without_identity(
                     },
                     _hit(),
                 ]
-            }
-        ]
-    )
-
-    scraper = StartupScraper(
-        fetcher,
-        registry=_registry(tmp_path),
+            },
+        ],
     )
 
     records = [
@@ -221,15 +250,13 @@ async def test_yc_scraper_skips_hits_without_identity(
 async def test_yc_scraper_stops_when_algolia_is_exhausted(
     tmp_path: Path,
 ):
-    fetcher = FakeFetcher(
+    scraper, fetcher = _scraper(
+        tmp_path,
         [
-            {"hits": []},
-        ]
-    )
-
-    scraper = StartupScraper(
-        fetcher,
-        registry=_registry(tmp_path),
+            {
+                "hits": [],
+            },
+        ],
     )
 
     records = [
@@ -239,6 +266,42 @@ async def test_yc_scraper_stops_when_algolia_is_exhausted(
 
     assert records == []
     assert len(fetcher.calls) == 1
+
+
+@pytest.mark.asyncio
+async def test_yc_scraper_uses_injected_key_without_directory_request(
+    tmp_path: Path,
+):
+    scraper, fetcher = _scraper(
+        tmp_path,
+        [
+            {
+                "hits": [
+                    _hit(),
+                ]
+            },
+        ],
+    )
+
+    records = [
+        record
+        async for record in scraper.scrape(1)
+    ]
+
+    assert records
+
+    assert len(fetcher.calls) == 1
+
+    url, _, headers = fetcher.calls[0]
+
+    assert url.startswith(
+        "https://45bwzj1sgc-dsn.algolia.net/"
+    )
+
+    assert (
+        headers["X-Algolia-API-Key"]
+        == "test-algolia-api-key"
+    )
 
 
 @pytest.mark.asyncio
@@ -271,6 +334,7 @@ async def test_yc_scraper_rejects_non_algolia_source(
     scraper = StartupScraper(
         fetcher,
         registry=registry,
+        algolia_api_key="test-algolia-api-key",
     )
 
     with pytest.raises(
