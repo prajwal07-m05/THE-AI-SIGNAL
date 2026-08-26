@@ -8,12 +8,20 @@ Behavior:
   * Walk providers in configured fallback order.
   * Skip providers whose temporary circuit is open.
   * Fit source text to each provider's input-token budget.
-  * On 429, retry the SAME provider with exponential full-jitter backoff.
-  * Respect Retry-After when supplied by the provider.
+  * On transient 429s, retry the SAME provider with exponential
+    full-jitter backoff.
+  * Respect reasonable Retry-After values supplied by the provider.
+  * Never block the entire pipeline for an excessively large Retry-After.
   * After exhausting 429 retries, temporarily cool down that provider.
   * On 413, reduce the payload budget and retry with a smaller payload.
   * If a provider remains unable to process the request, fall through.
   * Never fabricate data when all providers fail; raise AllProvidersFailed.
+
+The orchestrator intentionally treats very large Retry-After values as
+provider-unavailable for the current request. This prevents a single
+rate-limited provider from serializing the entire ingestion pipeline for
+multiple minutes, especially when a provider has exhausted a daily token
+budget.
 """
 
 from __future__ import annotations
@@ -51,6 +59,14 @@ _MIN_PAYLOAD_BUDGET = 500
 # Temporary provider cooldown after exhausting the 429 retry budget.
 _DEFAULT_PROVIDER_COOLDOWN = 60.0
 
+# Never allow one LLM request to sleep for several minutes because of a
+# provider-supplied Retry-After value.
+#
+# Normal Retry-After values such as 1s, 3.5s, or 20s are still respected.
+# Values above this threshold indicate that continuing to wait is more
+# harmful to pipeline throughput than falling through to another provider.
+_MAX_RETRY_AFTER = 30.0
+
 
 class AllProvidersFailed(Exception):
     """Raised when no configured LLM provider can process the request."""
@@ -77,6 +93,7 @@ class LLMOrchestrator:
         chain: list[LLMProvider] | None = None,
         max_429_retries: int = 4,
         provider_cooldown: float = _DEFAULT_PROVIDER_COOLDOWN,
+        max_retry_after: float = _MAX_RETRY_AFTER,
     ) -> None:
         if max_429_retries < 0:
             raise ValueError(
@@ -88,6 +105,11 @@ class LLMOrchestrator:
                 "provider_cooldown must be >= 0"
             )
 
+        if max_retry_after < 0:
+            raise ValueError(
+                "max_retry_after must be >= 0"
+            )
+
         self._chain = chain or build_provider_chain()
 
         # Keep the public constructor parameter name while using the
@@ -96,6 +118,10 @@ class LLMOrchestrator:
 
         self._provider_cooldown = float(
             provider_cooldown
+        )
+
+        self._max_retry_after = float(
+            max_retry_after
         )
 
         self._state: dict[str, _ProviderState] = {
@@ -206,6 +232,36 @@ class LLMOrchestrator:
                 )
 
             except ProviderRateLimited as exc:
+                retry_after = self._normalise_retry_after(
+                    exc.retry_after
+                )
+
+                # A very large Retry-After is treated as a provider
+                # availability problem rather than something this pipeline
+                # should synchronously wait for.
+                #
+                # This is particularly important for daily token limits:
+                # the provider can legitimately tell us to wait several
+                # minutes, but waiting that long for one record prevents the
+                # fallback chain from doing useful work.
+                if (
+                    exc.retry_after is not None
+                    and float(exc.retry_after)
+                    > self._max_retry_after
+                ):
+                    self._open_provider(
+                        provider,
+                        reason=(
+                            "429 Retry-After exceeds "
+                            f"{self._max_retry_after:.1f}s"
+                        ),
+                    )
+
+                    raise ProviderUnavailable(
+                        "429 Retry-After too large; "
+                        "provider temporarily unavailable"
+                    ) from exc
+
                 # We have exhausted this provider's retry budget.
                 #
                 # The correct internal attribute is _max_429.
@@ -219,11 +275,8 @@ class LLMOrchestrator:
                         "429 budget exhausted"
                     ) from exc
 
-                if exc.retry_after is not None:
-                    delay = max(
-                        0.0,
-                        float(exc.retry_after),
-                    )
+                if retry_after is not None:
+                    delay = retry_after
                 else:
                     delay = _backoff(attempt)
 
@@ -234,7 +287,9 @@ class LLMOrchestrator:
                     delay=delay,
                 )
 
-                await asyncio.sleep(delay)
+                await asyncio.sleep(
+                    delay
+                )
 
                 attempt += 1
 
@@ -269,6 +324,29 @@ class LLMOrchestrator:
                 #
                 # A payload reduction should not consume the 429 budget.
                 attempt = 0
+
+    def _normalise_retry_after(
+        self,
+        retry_after: float | None,
+    ) -> float | None:
+        """Return a safe Retry-After value.
+
+        ProviderRateLimited may omit Retry-After entirely. In that case
+        the orchestrator uses its own exponential-jitter backoff.
+
+        Negative values are clamped to zero.
+
+        Large values are deliberately NOT returned here as a delay. The
+        caller checks the original value first and falls through instead.
+        """
+
+        if retry_after is None:
+            return None
+
+        return max(
+            0.0,
+            float(retry_after),
+        )
 
     @staticmethod
     def _initial_budget(

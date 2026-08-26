@@ -511,6 +511,114 @@ async def test_success_closes_existing_circuit(
 
 
 @pytest.mark.asyncio
+async def test_large_retry_after_falls_through_without_sleep(
+    monkeypatch,
+):
+    first = FakeProvider(
+        "groq",
+        errors=[
+            ProviderRateLimited(
+                retry_after=364.0,
+            ),
+        ],
+    )
+
+    second = FakeProvider(
+        "deepseek",
+        responses=[
+            {"provider": "deepseek"},
+        ],
+    )
+
+    sleeps: list[float] = []
+
+    async def fake_sleep(
+        delay: float,
+    ):
+        sleeps.append(delay)
+
+    monkeypatch.setattr(
+        "src.llm.orchestrator.asyncio.sleep",
+        fake_sleep,
+    )
+
+    orchestrator = LLMOrchestrator(
+        chain=[
+            first,
+            second,
+        ],
+        max_retry_after=30.0,
+    )
+
+    result = await orchestrator.extract(
+        _RECORD_TYPE,
+        "paper text",
+    )
+
+    assert result == {
+        "provider": "deepseek",
+    }
+
+    assert len(first.calls) == 1
+    assert len(second.calls) == 1
+    assert sleeps == []
+
+    assert orchestrator._state["groq"].cooldown_until > 0
+
+
+@pytest.mark.asyncio
+async def test_retry_after_at_or_below_limit_is_respected(
+    monkeypatch,
+):
+    provider = FakeProvider(
+        "groq",
+        errors=[
+            ProviderRateLimited(
+                retry_after=30.0,
+            ),
+        ],
+        responses=[
+            {"ok": True},
+        ],
+    )
+
+    sleeps: list[float] = []
+
+    async def fake_sleep(
+        delay: float,
+    ):
+        sleeps.append(delay)
+
+    monkeypatch.setattr(
+        "src.llm.orchestrator.asyncio.sleep",
+        fake_sleep,
+    )
+
+    orchestrator = LLMOrchestrator(
+        chain=[
+            provider,
+        ],
+        max_retry_after=30.0,
+        max_429_retries=1,
+    )
+
+    result = await orchestrator.extract(
+        _RECORD_TYPE,
+        "paper text",
+    )
+
+    assert result == {
+        "ok": True,
+    }
+
+    assert sleeps == [
+        30.0,
+    ]
+
+    assert len(provider.calls) == 2
+
+
+@pytest.mark.asyncio
 async def test_413_reduces_payload_budget(
     monkeypatch,
 ):
