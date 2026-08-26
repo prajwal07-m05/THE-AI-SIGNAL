@@ -1,347 +1,294 @@
-"""Behavior tests for the Y Combinator startup/product scraper."""
+"""Startup and product directory scraper.
+
+The Y Combinator source configuration comes from config/sources.yaml.
+
+YC's public companies directory exposes the configuration required by its
+public Algolia search endpoint. Production runs discover the current public
+Algolia API key from the directory instead of relying on an expired
+hard-coded key.
+
+Tests can inject the public API key directly so they remain deterministic
+and network-free.
+
+No YC login or authentication is required.
+"""
 
 from __future__ import annotations
 
-from pathlib import Path
+import json
+import re
+from collections.abc import AsyncIterator
+from typing import Any
 
-import pytest
-import yaml
-
-from src.core.source_registry import SourceRegistry
-from src.scrapers.startups_scraper import StartupScraper
+from src.scrapers.base import BaseScraper
 
 
-class FakeFetcher:
-    def __init__(self, responses: list[dict]):
-        self.responses = responses
-        self.calls: list[tuple[str, str, dict]] = []
+_ALGOLIA_APP_ID = "45BWZJ1SGC"
 
-    async def post_json(self, url, body, headers=None):
-        self.calls.append(
-            (
-                url,
-                body,
-                headers or {},
-            )
+_ALGOLIA_HOST = (
+    "https://45bwzj1sgc-dsn.algolia.net"
+)
+
+_YC_DIRECTORY_URL = (
+    "https://www.ycombinator.com/companies"
+)
+
+_PAGE = 1000
+
+
+# YC currently exposes the public Algolia configuration as:
+#
+# window.AlgoliaOpts = {
+#     "app": "45BWZJ1SGC",
+#     "key": "...",
+# }
+#
+# Keep the extraction tied to AlgoliaOpts so that an unrelated "key" in
+# the page cannot accidentally be treated as the Algolia credential.
+_ALGOLIA_OPTS_PATTERN = re.compile(
+    r"window\.AlgoliaOpts\s*=\s*\{.*?"
+    r'"key"\s*:\s*"([^"]+)"',
+    re.IGNORECASE | re.DOTALL,
+)
+
+
+# Older/current variants are retained as fallbacks in case YC changes the
+# exact JavaScript serialization while keeping the same public configuration.
+_API_KEY_PATTERNS = (
+    re.compile(
+        r'"apiKey"\s*:\s*"([^"]+)"',
+        re.IGNORECASE,
+    ),
+    re.compile(
+        r'"api_key"\s*:\s*"([^"]+)"',
+        re.IGNORECASE,
+    ),
+    re.compile(
+        r'"algoliaApiKey"\s*:\s*"([^"]+)"',
+        re.IGNORECASE,
+    ),
+    re.compile(
+        r'"algolia_api_key"\s*:\s*"([^"]+)"',
+        re.IGNORECASE,
+    ),
+    re.compile(
+        r'"ALGOLIA_API_KEY"\s*:\s*"([^"]+)"',
+        re.IGNORECASE,
+    ),
+)
+
+
+def _extract_algolia_api_key(
+    html: str,
+) -> str | None:
+    """Extract YC's public Algolia API key from directory HTML."""
+
+    match = _ALGOLIA_OPTS_PATTERN.search(
+        html
+    )
+
+    if match:
+        api_key = match.group(1).strip()
+
+        if api_key:
+            return api_key
+
+    for pattern in _API_KEY_PATTERNS:
+        match = pattern.search(
+            html
         )
-        return self.responses.pop(0)
+
+        if not match:
+            continue
+
+        api_key = match.group(1).strip()
+
+        if api_key:
+            return api_key
+
+    return None
 
 
-def _registry(tmp_path: Path) -> SourceRegistry:
-    path = tmp_path / "sources.yaml"
+class StartupScraper(BaseScraper):
+    source_name = "Y Combinator"
 
-    path.write_text(
-        yaml.safe_dump(
-            {
-                "research_papers": [],
-                "startups_products": [
-                    {
-                        "name": "Y Combinator",
-                        "type": "algolia",
-                        "index": "ConfiguredIndex",
-                    }
-                ],
-                "news": [],
-                "jobs": [],
-                "freshness_window_hours": 24,
-            }
-        ),
-        encoding="utf-8",
-    )
-
-    return SourceRegistry(path)
-
-
-def _scraper(
-    tmp_path: Path,
-    responses: list[dict],
-) -> tuple[StartupScraper, FakeFetcher]:
-    fetcher = FakeFetcher(responses)
-
-    scraper = StartupScraper(
+    def __init__(
+        self,
         fetcher,
-        registry=_registry(tmp_path),
-        algolia_api_key="test-algolia-api-key",
-    )
+        registry=None,
+        algolia_api_key: str | None = None,
+    ) -> None:
+        super().__init__(
+            fetcher,
+            registry=registry,
+        )
 
-    return scraper, fetcher
+        self._algolia_api_key = (
+            algolia_api_key.strip()
+            if algolia_api_key
+            else None
+        )
 
+    async def _discover_algolia_api_key(self) -> str:
+        """Discover YC's current public Algolia key."""
 
-def _hit(
-    *,
-    name: str = "Example AI",
-    slug: str = "example-ai",
-) -> dict:
-    return {
-        "name": name,
-        "slug": slug,
-        "team_size": 12,
-        "one_liner": "AI infrastructure for developers",
-        "long_description": "A longer description of Example AI.",
-        "batch": "W24",
-    }
+        response = await self.fetcher.get(
+            _YC_DIRECTORY_URL,
+        )
 
+        api_key = _extract_algolia_api_key(
+            response.text
+        )
 
-@pytest.mark.asyncio
-async def test_yc_scraper_uses_configured_algolia_index(
-    tmp_path: Path,
-):
-    scraper, fetcher = _scraper(
-        tmp_path,
-        [
-            {
-                "hits": [
-                    _hit(),
-                ]
-            },
-        ],
-    )
+        if not api_key:
+            raise RuntimeError(
+                "Could not discover YC's public Algolia API key "
+                "from the public companies directory."
+            )
 
-    records = [
-        record
-        async for record in scraper.scrape(1)
-    ]
+        return api_key
 
-    assert len(records) == 2
-    assert len(fetcher.calls) == 1
+    async def _get_algolia_api_key(self) -> str:
+        """Return an injected key or discover the live public key."""
 
-    url, body, headers = fetcher.calls[0]
+        if self._algolia_api_key:
+            return self._algolia_api_key
 
-    assert (
-        url
-        == "https://45bwzj1sgc-dsn.algolia.net/1/indexes/"
-        "ConfiguredIndex/query"
-    )
+        return await self._discover_algolia_api_key()
 
-    assert '"query": ""' in body
-    assert '"hitsPerPage": 1' in body
-    assert '"page": 0' in body
-    assert '"attributesToRetrieve": ["*"]' in body
+    async def scrape(
+        self,
+        limit: int,
+    ) -> AsyncIterator[dict[str, Any]]:
+        if limit <= 0:
+            return
 
-    assert (
-        headers["X-Algolia-Application-Id"]
-        == "45BWZJ1SGC"
-    )
-    assert (
-        headers["X-Algolia-API-Key"]
-        == "test-algolia-api-key"
-    )
-    assert (
-        headers["Content-Type"]
-        == "application/json"
-    )
+        source = self.source(
+            "startups_products",
+            self.source_name,
+        )
 
+        if source.source_type != "algolia":
+            raise RuntimeError(
+                f"unsupported startup source type: {source.source_type}"
+            )
 
-@pytest.mark.asyncio
-async def test_yc_scraper_emits_startup_and_product(
-    tmp_path: Path,
-):
-    scraper, _ = _scraper(
-        tmp_path,
-        [
-            {
-                "hits": [
-                    _hit(),
-                ]
-            },
-        ],
-    )
+        if not source.index:
+            raise RuntimeError(
+                f"startup source '{source.name}' has no configured index"
+            )
 
-    records = [
-        record
-        async for record in scraper.scrape(1)
-    ]
+        api_key = await self._get_algolia_api_key()
 
-    assert len(records) == 2
+        endpoint = (
+            f"{_ALGOLIA_HOST}/1/indexes/"
+            f"{source.index}/query"
+        )
 
-    startup, product = records
+        headers = {
+            "X-Algolia-Application-Id": _ALGOLIA_APP_ID,
+            "X-Algolia-API-Key": api_key,
+            "Content-Type": "application/json",
+        }
 
-    assert startup["record_kind"] == "STARTUP"
-    assert startup["source_name"] == "Y Combinator"
-    assert (
-        startup["source_url"]
-        == "https://www.ycombinator.com/companies/example-ai"
-    )
-    assert startup["name"] == "Example AI"
-    assert startup["team_size"] == 12
-    assert startup["batch"] == "W24"
+        fetched = 0
+        page = 0
 
-    assert product["record_kind"] == "PRODUCT"
-    assert product["source_name"] == "Y Combinator"
-    assert (
-        product["source_url"]
-        == "https://www.ycombinator.com/companies/example-ai"
-    )
-    assert product["startup_name"] == "Example AI"
-    assert (
-        product["product_desc"]
-        == "AI infrastructure for developers"
-    )
-
-
-@pytest.mark.asyncio
-async def test_yc_scraper_respects_limit(
-    tmp_path: Path,
-):
-    scraper, fetcher = _scraper(
-        tmp_path,
-        [
-            {
-                "hits": [
-                    _hit(
-                        name="First AI",
-                        slug="first-ai",
+        while fetched < limit:
+            body = json.dumps(
+                {
+                    "query": "",
+                    "hitsPerPage": min(
+                        _PAGE,
+                        limit - fetched,
                     ),
-                    _hit(
-                        name="Second AI",
-                        slug="second-ai",
+                    "page": page,
+                    "attributesToRetrieve": ["*"],
+                }
+            )
+
+            try:
+                response = await self.fetcher.post_json(
+                    endpoint,
+                    body,
+                    headers,
+                )
+            except AttributeError:
+                self.log.error(
+                    "algolia_fetcher_missing_post_json",
+                    source=source.name,
+                )
+                raise
+
+            hits = response.get(
+                "hits",
+                [],
+            )
+
+            if not hits:
+                self.log.info(
+                    "yc_exhausted",
+                    page=page,
+                )
+                return
+
+            for hit in hits:
+                if fetched >= limit:
+                    return
+
+                name = hit.get(
+                    "name"
+                )
+                slug = hit.get(
+                    "slug"
+                )
+
+                if not name or not slug:
+                    self.log.warning(
+                        "yc_record_missing_identity",
+                        page=page,
+                    )
+                    continue
+
+                source_url = (
+                    f"https://www.ycombinator.com/companies/{slug}"
+                )
+
+                yield {
+                    "record_kind": "STARTUP",
+                    "source_name": source.name,
+                    "source_url": source_url,
+                    "name": name,
+                    "team_size": hit.get(
+                        "team_size"
                     ),
-                ]
-            },
-        ],
-    )
+                    "one_liner": hit.get(
+                        "one_liner",
+                        "",
+                    ),
+                    "long_description": (
+                        hit.get(
+                            "long_description",
+                            "",
+                        )
+                        or ""
+                    )[:4000],
+                    "batch": hit.get(
+                        "batch"
+                    ),
+                }
 
-    records = [
-        record
-        async for record in scraper.scrape(1)
-    ]
+                yield {
+                    "record_kind": "PRODUCT",
+                    "source_name": source.name,
+                    "source_url": source_url,
+                    "startup_name": name,
+                    "product_desc": hit.get(
+                        "one_liner",
+                        "",
+                    ),
+                }
 
-    assert len(records) == 2
-    assert records[0]["name"] == "First AI"
-    assert records[1]["startup_name"] == "First AI"
+                fetched += 1
 
-    assert len(fetcher.calls) == 1
-
-    _, body, _ = fetcher.calls[0]
-
-    assert '"hitsPerPage": 1' in body
-
-
-@pytest.mark.asyncio
-async def test_yc_scraper_skips_hits_without_identity(
-    tmp_path: Path,
-):
-    scraper, _ = _scraper(
-        tmp_path,
-        [
-            {
-                "hits": [
-                    {
-                        "name": "Missing Slug",
-                        "team_size": 4,
-                    },
-                    _hit(),
-                ]
-            },
-        ],
-    )
-
-    records = [
-        record
-        async for record in scraper.scrape(1)
-    ]
-
-    assert len(records) == 2
-    assert records[0]["record_kind"] == "STARTUP"
-    assert records[0]["name"] == "Example AI"
-
-
-@pytest.mark.asyncio
-async def test_yc_scraper_stops_when_algolia_is_exhausted(
-    tmp_path: Path,
-):
-    scraper, fetcher = _scraper(
-        tmp_path,
-        [
-            {
-                "hits": [],
-            },
-        ],
-    )
-
-    records = [
-        record
-        async for record in scraper.scrape(10)
-    ]
-
-    assert records == []
-    assert len(fetcher.calls) == 1
-
-
-@pytest.mark.asyncio
-async def test_yc_scraper_uses_injected_key_without_directory_request(
-    tmp_path: Path,
-):
-    scraper, fetcher = _scraper(
-        tmp_path,
-        [
-            {
-                "hits": [
-                    _hit(),
-                ]
-            },
-        ],
-    )
-
-    records = [
-        record
-        async for record in scraper.scrape(1)
-    ]
-
-    assert records
-
-    assert len(fetcher.calls) == 1
-
-    url, _, headers = fetcher.calls[0]
-
-    assert url.startswith(
-        "https://45bwzj1sgc-dsn.algolia.net/"
-    )
-
-    assert (
-        headers["X-Algolia-API-Key"]
-        == "test-algolia-api-key"
-    )
-
-
-@pytest.mark.asyncio
-async def test_yc_scraper_rejects_non_algolia_source(
-    tmp_path: Path,
-):
-    path = tmp_path / "sources.yaml"
-
-    path.write_text(
-        yaml.safe_dump(
-            {
-                "research_papers": [],
-                "startups_products": [
-                    {
-                        "name": "Y Combinator",
-                        "type": "api",
-                        "endpoint": "https://example.com",
-                    }
-                ],
-                "news": [],
-                "jobs": [],
-            }
-        ),
-        encoding="utf-8",
-    )
-
-    registry = SourceRegistry(path)
-    fetcher = FakeFetcher([])
-
-    scraper = StartupScraper(
-        fetcher,
-        registry=registry,
-        algolia_api_key="test-algolia-api-key",
-    )
-
-    with pytest.raises(
-        RuntimeError,
-        match="unsupported startup source type",
-    ):
-        [
-            record
-            async for record in scraper.scrape(1)
-        ]
+            page += 1

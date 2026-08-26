@@ -17,7 +17,7 @@ from __future__ import annotations
 
 import json
 import re
-from collections.abc import AsyncIterator, Awaitable, Callable
+from collections.abc import AsyncIterator
 from typing import Any
 
 from src.scrapers.base import BaseScraper
@@ -34,6 +34,12 @@ _YC_DIRECTORY_URL = (
 )
 
 _PAGE = 1000
+
+
+_ALGOLIA_OPTS_PATTERN = re.compile(
+    r"window\.AlgoliaOpts\s*=\s*(\{.*?\})\s*;",
+    re.IGNORECASE | re.DOTALL,
+)
 
 
 _API_KEY_PATTERNS = (
@@ -65,8 +71,34 @@ def _extract_algolia_api_key(
 ) -> str | None:
     """Extract YC's public Algolia API key from directory HTML."""
 
+    match = _ALGOLIA_OPTS_PATTERN.search(
+        html
+    )
+
+    if match:
+        try:
+            options = json.loads(
+                match.group(1)
+            )
+        except json.JSONDecodeError:
+            options = None
+
+        if isinstance(options, dict):
+            app_id = options.get("app")
+            api_key = options.get("key")
+
+            if (
+                isinstance(app_id, str)
+                and app_id == _ALGOLIA_APP_ID
+                and isinstance(api_key, str)
+                and api_key.strip()
+            ):
+                return api_key.strip()
+
     for pattern in _API_KEY_PATTERNS:
-        match = pattern.search(html)
+        match = pattern.search(
+            html
+        )
 
         if not match:
             continue
@@ -206,8 +238,12 @@ class StartupScraper(BaseScraper):
                 if fetched >= limit:
                     return
 
-                name = hit.get("name")
-                slug = hit.get("slug")
+                name = hit.get(
+                    "name"
+                )
+                slug = hit.get(
+                    "slug"
+                )
 
                 if not name or not slug:
                     self.log.warning(
@@ -217,8 +253,7 @@ class StartupScraper(BaseScraper):
                     continue
 
                 source_url = (
-                    "https://www.ycombinator.com/"
-                    f"companies/{slug}"
+                    f"https://www.ycombinator.com/companies/{slug}"
                 )
 
                 yield {
@@ -226,7 +261,9 @@ class StartupScraper(BaseScraper):
                     "source_name": source.name,
                     "source_url": source_url,
                     "name": name,
-                    "team_size": hit.get("team_size"),
+                    "team_size": hit.get(
+                        "team_size"
+                    ),
                     "one_liner": hit.get(
                         "one_liner",
                         "",
@@ -238,7 +275,9 @@ class StartupScraper(BaseScraper):
                         )
                         or ""
                     )[:4000],
-                    "batch": hit.get("batch"),
+                    "batch": hit.get(
+                        "batch"
+                    ),
                 }
 
                 yield {

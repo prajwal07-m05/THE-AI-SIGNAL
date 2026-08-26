@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
 import pytest
@@ -9,6 +10,17 @@ import yaml
 
 from src.core.source_registry import SourceRegistry
 from src.scrapers.jobs_scraper import JobsScraper
+
+
+def _fresh_iso(hours_ago: float = 1) -> str:
+    """Return a timestamp safely inside the 24-hour freshness window."""
+    dt = datetime.now(timezone.utc) - timedelta(hours=hours_ago)
+    return dt.isoformat().replace("+00:00", "Z")
+
+
+def _fresh_date() -> str:
+    """Return today's UTC date for date-only job fixtures."""
+    return datetime.now(timezone.utc).date().isoformat()
 
 
 class FakeResponse:
@@ -91,9 +103,7 @@ async def test_remotive_filters_for_ai_and_preserves_fields(
                                 "https://example.com/llm"
                             ),
                             "company_name": "AI Co",
-                            "publication_date": (
-                                "2026-08-25T10:00:00Z"
-                            ),
+                            "publication_date": _fresh_iso(),
                         },
                     ]
                 }
@@ -146,6 +156,8 @@ async def test_remotive_filters_for_ai_and_preserves_fields(
 async def test_arbeitnow_filters_for_ai(
     tmp_path: Path,
 ):
+    published_date = _fresh_iso()
+
     fetcher = FakeFetcher(
         [
             FakeResponse(
@@ -167,9 +179,7 @@ async def test_arbeitnow_filters_for_ai(
                                 "https://example.com/ml"
                             ),
                             "company_name": "ML Co",
-                            "created_at": (
-                                "2026-08-25T09:00:00Z"
-                            ),
+                            "created_at": published_date,
                             "remote": True,
                         },
                     ]
@@ -209,9 +219,7 @@ async def test_arbeitnow_filters_for_ai(
         "Machine Learning Engineer"
     )
     assert record["company"] == "ML Co"
-    assert record["published_date"] == (
-        "2026-08-25T09:00:00Z"
-    )
+    assert record["published_date"] == published_date
     assert record["is_remote"] is True
 
     assert fetcher.calls[0]["url"] == (
@@ -223,6 +231,8 @@ async def test_arbeitnow_filters_for_ai(
 async def test_remoteok_filters_for_ai(
     tmp_path: Path,
 ):
+    published_date = _fresh_date()
+
     fetcher = FakeFetcher(
         [
             FakeResponse(
@@ -243,7 +253,7 @@ async def test_remoteok_filters_for_ai(
                             "https://example.com/genai"
                         ),
                         "company": "GenAI Co",
-                        "date": "2026-08-25",
+                        "date": published_date,
                     },
                 ]
             )
@@ -279,9 +289,7 @@ async def test_remoteok_filters_for_ai(
     )
     assert record["title"] == "GenAI Engineer"
     assert record["company"] == "GenAI Co"
-    assert record["published_date"] == (
-        "2026-08-25"
-    )
+    assert record["published_date"] == published_date
     assert record["is_remote"] is True
 
     assert fetcher.calls[0]["url"] == (
@@ -306,9 +314,7 @@ async def test_hacker_news_hiring_uses_configured_query(
                             "story_text": (
                                 "Looking for an ML engineer."
                             ),
-                            "created_at": (
-                                "2026-08-25T08:00:00Z"
-                            ),
+                            "created_at": _fresh_iso(),
                         }
                     ]
                 }
@@ -363,6 +369,7 @@ async def test_hacker_news_hiring_builds_item_url(
                             "comment_text": (
                                 "Hiring a computer vision engineer."
                             ),
+                            "created_at": _fresh_iso(),
                         }
                     ]
                 }
@@ -576,9 +583,7 @@ async def test_stale_jobs_do_not_consume_limit(
                                 "https://example.com/fresh"
                             ),
                             "company_name": "Fresh Co",
-                            "publication_date": (
-                                "2026-08-25T18:00:00Z"
-                            ),
+                            "publication_date": _fresh_iso(),
                         },
                     ]
                 }
@@ -661,5 +666,4 @@ async def test_missing_timestamp_is_deferred_to_pipeline(
     ]
 
     assert len(records) == 1
-
     assert records[0]["published_date"] is None
