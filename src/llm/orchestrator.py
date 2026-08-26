@@ -6,6 +6,7 @@ provider cooldowns.
 Behavior:
 
   * Walk providers in configured fallback order.
+  * Skip providers whose temporary circuit is open.
   * Fit source text to each provider's input-token budget.
   * On 429, retry the SAME provider with exponential full-jitter backoff.
   * Respect Retry-After when supplied by the provider.
@@ -40,7 +41,7 @@ log = get_logger(__name__)
 #   * system prompt
 #   * extraction schema
 #   * JSON wrapper
-#   * small provider-specific overhead
+#   * provider-specific overhead
 _PROMPT_OVERHEAD = 800
 
 # Once repeated 413 responses reduce the payload below this threshold,
@@ -63,6 +64,8 @@ class _ProviderState:
 
     @property
     def is_cooling_down(self) -> bool:
+        """Return True while the provider circuit is open."""
+
         return time.monotonic() < self.cooldown_until
 
 
@@ -76,14 +79,20 @@ class LLMOrchestrator:
         provider_cooldown: float = _DEFAULT_PROVIDER_COOLDOWN,
     ) -> None:
         if max_429_retries < 0:
-            raise ValueError("max_429_retries must be >= 0")
+            raise ValueError(
+                "max_429_retries must be >= 0"
+            )
 
         if provider_cooldown < 0:
-            raise ValueError("provider_cooldown must be >= 0")
+            raise ValueError(
+                "provider_cooldown must be >= 0"
+            )
 
         self._chain = chain or build_provider_chain()
         self._max_429 = max_429_retries
-        self._provider_cooldown = float(provider_cooldown)
+        self._provider_cooldown = float(
+            provider_cooldown
+        )
 
         self._state: dict[str, _ProviderState] = {
             provider.name: _ProviderState()
@@ -114,7 +123,7 @@ class LLMOrchestrator:
                     text,
                 )
 
-                # Successful request means the provider is healthy.
+                # A successful request proves the provider is healthy.
                 self._close_provider(provider)
 
                 return result
@@ -147,7 +156,8 @@ class LLMOrchestrator:
             ) from last_err
 
         raise AllProvidersFailed(
-            "no providers available; all providers are cooling down"
+            "no providers available; "
+            "all providers are cooling down"
         )
 
     async def _call_with_backoff(
@@ -158,16 +168,11 @@ class LLMOrchestrator:
     ) -> dict:
         """Call one provider with token fitting and retry handling."""
 
-        # IMPORTANT:
+        # Do not reject small providers before their first request.
         #
-        # Do NOT reject a provider here merely because the remaining budget
-        # is below _MIN_PAYLOAD_BUDGET.
-        #
-        # Tests and lightweight providers can legitimately expose a small
-        # context budget. We should still make the first call with whatever
-        # budget remains after prompt overhead.
-        #
-        # The minimum threshold is only used AFTER a real 413 response.
+        # Some lightweight/test providers legitimately advertise a small
+        # context window. The minimum payload threshold is enforced only
+        # after a genuine 413 response.
         budget = self._initial_budget(provider)
 
         payload = self._fit(
@@ -220,14 +225,19 @@ class LLMOrchestrator:
                 attempt += 1
 
             except ProviderPayloadTooLarge:
-                # The request was genuinely too large despite pre-fitting.
-                #
-                # Reduce the source payload budget and retry the SAME provider.
+                previous_budget = budget
+
+                # Reduce the source-text budget by half.
                 budget //= 2
+
+                # Guarantee that every 413 changes the budget.
+                if budget >= previous_budget:
+                    budget = previous_budget - 1
 
                 log.info(
                     "llm_413_reduce",
                     provider=provider.name,
+                    previous_budget=previous_budget,
                     new_budget=budget,
                 )
 
@@ -241,27 +251,27 @@ class LLMOrchestrator:
                     budget,
                 )
 
-                # A payload-size failure should not consume the 429 retry
-                # budget. They are independent failure modes.
+                # 413 and 429 are independent failure modes.
+                # A payload reduction should not consume the 429 budget.
                 attempt = 0
 
     @staticmethod
     def _initial_budget(
         provider: LLMProvider,
     ) -> int:
-        """Calculate the initial usable source-text token budget.
+        """Calculate the initial usable source-text token budget."""
 
-        A provider with a small max_input_tokens value is still allowed to
-        make a first request. The orchestrator only enforces the minimum
-        budget after an actual 413 response.
-        """
+        budget = (
+            provider.max_input_tokens
+            - _PROMPT_OVERHEAD
+        )
 
-        budget = provider.max_input_tokens - _PROMPT_OVERHEAD
-
-        # If the provider's advertised context is smaller than the prompt
-        # overhead, give it a minimal positive budget rather than rejecting
-        # the provider before it gets a chance to answer.
-        return max(1, budget)
+        # If the advertised context is smaller than the reserved prompt
+        # overhead, still allow a minimal first request.
+        return max(
+            1,
+            budget,
+        )
 
     @staticmethod
     def _fit(
@@ -295,7 +305,8 @@ class LLMOrchestrator:
         )
 
         if not state.is_cooling_down:
-            # Cooldown expired. Reset the state.
+            # Cooldown expired. Clear the old state so the provider can
+            # participate normally again.
             if state.cooldown_until:
                 state.cooldown_until = 0.0
 
