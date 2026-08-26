@@ -1,10 +1,10 @@
-httpx[http2]>=0.27
+httpx[http2]>=0.28.1,<1
 aiolimiter>=1.1
 tenacity>=8.2
 beautifulsoup4>=4.12
 lxml>=5.0
 feedparser>=6.0
-pydantic>=2.7
+pydantic>=2.12
 pydantic-settings>=2.2
 python-dateutil>=2.9
 rapidfuzz>=3.9
@@ -12,5 +12,10 @@ tiktoken>=0.7
 structlog>=24.1
 rich>=13.7
 PyYAML>=6.0
+
+google-genai>=2.20,<3
+groq>=1.7,<2
+openai>=3.3,<4
+
 pytest>=8.0
 pytest-asyncio>=0.23
