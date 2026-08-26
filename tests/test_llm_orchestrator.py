@@ -301,6 +301,216 @@ async def test_429_budget_exhaustion_falls_through():
 
 
 @pytest.mark.asyncio
+async def test_429_budget_exhaustion_opens_circuit(
+    monkeypatch,
+):
+    first = FakeProvider(
+        "gemini",
+        errors=[
+            ProviderRateLimited(),
+            ProviderRateLimited(),
+        ],
+    )
+
+    second = FakeProvider(
+        "groq",
+        responses=[
+            {"provider": "groq"},
+        ],
+    )
+
+    orchestrator = LLMOrchestrator(
+        chain=[
+            first,
+            second,
+        ],
+        max_429_retries=1,
+        provider_cooldown=60,
+    )
+
+    result = await orchestrator.extract(
+        _RECORD_TYPE,
+        "paper text",
+    )
+
+    assert result == {
+        "provider": "groq",
+    }
+
+    assert orchestrator._state["gemini"].cooldown_until > 0
+
+
+@pytest.mark.asyncio
+async def test_circuit_open_provider_is_skipped(
+    monkeypatch,
+):
+    first = FakeProvider(
+        "gemini",
+        responses=[
+            {"provider": "gemini"},
+        ],
+    )
+
+    second = FakeProvider(
+        "groq",
+        responses=[
+            {"provider": "groq"},
+        ],
+    )
+
+    orchestrator = LLMOrchestrator(
+        chain=[
+            first,
+            second,
+        ],
+        provider_cooldown=60,
+    )
+
+    orchestrator._open_provider(
+        first,
+        reason="test",
+    )
+
+    result = await orchestrator.extract(
+        _RECORD_TYPE,
+        "paper text",
+    )
+
+    assert result == {
+        "provider": "groq",
+    }
+
+    assert len(first.calls) == 0
+    assert len(second.calls) == 1
+
+
+@pytest.mark.asyncio
+async def test_all_providers_cooling_down_raises():
+    first = FakeProvider(
+        "gemini",
+        responses=[
+            {"provider": "gemini"},
+        ],
+    )
+
+    second = FakeProvider(
+        "groq",
+        responses=[
+            {"provider": "groq"},
+        ],
+    )
+
+    orchestrator = LLMOrchestrator(
+        chain=[
+            first,
+            second,
+        ],
+        provider_cooldown=60,
+    )
+
+    orchestrator._open_provider(
+        first,
+        reason="test",
+    )
+
+    orchestrator._open_provider(
+        second,
+        reason="test",
+    )
+
+    with pytest.raises(
+        AllProvidersFailed,
+        match="all providers are cooling down",
+    ):
+        await orchestrator.extract(
+            _RECORD_TYPE,
+            "paper text",
+        )
+
+    assert len(first.calls) == 0
+    assert len(second.calls) == 0
+
+
+@pytest.mark.asyncio
+async def test_expired_circuit_is_reopened_for_use(
+    monkeypatch,
+):
+    provider = FakeProvider(
+        "gemini",
+        responses=[
+            {"provider": "gemini"},
+        ],
+    )
+
+    orchestrator = LLMOrchestrator(
+        chain=[
+            provider,
+        ],
+        provider_cooldown=60,
+    )
+
+    orchestrator._open_provider(
+        provider,
+        reason="test",
+    )
+
+    state = orchestrator._state["gemini"]
+
+    state.cooldown_until = 0.0
+
+    result = await orchestrator.extract(
+        _RECORD_TYPE,
+        "paper text",
+    )
+
+    assert result == {
+        "provider": "gemini",
+    }
+
+    assert len(provider.calls) == 1
+    assert state.cooldown_until == 0.0
+
+
+@pytest.mark.asyncio
+async def test_success_closes_existing_circuit(
+    monkeypatch,
+):
+    provider = FakeProvider(
+        "gemini",
+        responses=[
+            {"provider": "gemini"},
+        ],
+    )
+
+    orchestrator = LLMOrchestrator(
+        chain=[
+            provider,
+        ],
+        provider_cooldown=60,
+    )
+
+    orchestrator._open_provider(
+        provider,
+        reason="test",
+    )
+
+    state = orchestrator._state["gemini"]
+
+    state.cooldown_until = 0.0
+
+    result = await orchestrator.extract(
+        _RECORD_TYPE,
+        "paper text",
+    )
+
+    assert result == {
+        "provider": "gemini",
+    }
+
+    assert state.cooldown_until == 0.0
+
+
+@pytest.mark.asyncio
 async def test_413_reduces_payload_budget(
     monkeypatch,
 ):
@@ -422,6 +632,115 @@ async def test_413_below_minimum_falls_through():
     assert result == {
         "provider": "deepseek",
     }
+
+
+@pytest.mark.asyncio
+async def test_413_does_not_consume_429_retry_budget():
+    provider = FakeProvider(
+        "groq",
+        max_input_tokens=4000,
+        errors=[
+            ProviderPayloadTooLarge(),
+            ProviderRateLimited(),
+        ],
+        responses=[
+            {"ok": True},
+        ],
+    )
+
+    orchestrator = LLMOrchestrator(
+        chain=[
+            provider,
+        ],
+        max_429_retries=1,
+    )
+
+    result = await orchestrator.extract(
+        _RECORD_TYPE,
+        "paper text",
+    )
+
+    assert result == {
+        "ok": True,
+    }
+
+    assert len(provider.calls) == 3
+
+
+@pytest.mark.asyncio
+async def test_tiny_provider_budget_still_gets_first_attempt():
+    provider = FakeProvider(
+        "tiny",
+        max_input_tokens=100,
+        responses=[
+            {"provider": "tiny"},
+        ],
+    )
+
+    orchestrator = LLMOrchestrator(
+        chain=[
+            provider,
+        ],
+    )
+
+    result = await orchestrator.extract(
+        _RECORD_TYPE,
+        "paper text",
+    )
+
+    assert result == {
+        "provider": "tiny",
+    }
+
+    assert len(provider.calls) == 1
+
+
+def test_initial_budget_preserves_small_provider_budget():
+    provider = FakeProvider(
+        "small",
+        max_input_tokens=600,
+    )
+
+    budget = LLMOrchestrator._initial_budget(
+        provider,
+    )
+
+    assert budget == 1
+
+
+def test_initial_budget_uses_remaining_context():
+    provider = FakeProvider(
+        "normal",
+        max_input_tokens=2200,
+    )
+
+    budget = LLMOrchestrator._initial_budget(
+        provider,
+    )
+
+    assert budget == 1400
+
+
+def test_invalid_max_429_retries_rejected():
+    with pytest.raises(
+        ValueError,
+        match="max_429_retries must be >= 0",
+    ):
+        LLMOrchestrator(
+            chain=[],
+            max_429_retries=-1,
+        )
+
+
+def test_invalid_provider_cooldown_rejected():
+    with pytest.raises(
+        ValueError,
+        match="provider_cooldown must be >= 0",
+    ):
+        LLMOrchestrator(
+            chain=[],
+            provider_cooldown=-1,
+        )
 
 
 def test_fit_keeps_short_text_unchanged():
