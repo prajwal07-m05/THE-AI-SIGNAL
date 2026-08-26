@@ -89,7 +89,11 @@ class LLMOrchestrator:
             )
 
         self._chain = chain or build_provider_chain()
+
+        # Keep the public constructor parameter name while using the
+        # internal attribute consistently throughout the orchestrator.
         self._max_429 = max_429_retries
+
         self._provider_cooldown = float(
             provider_cooldown
         )
@@ -180,6 +184,13 @@ class LLMOrchestrator:
             budget,
         )
 
+        # Number of 429 retries performed for the current payload.
+        #
+        # Important:
+        #   * 429 increments this counter.
+        #   * 413 does NOT consume this budget.
+        #   * After a 413, the payload is reduced and the 429 retry budget
+        #     is reset.
         attempt = 0
 
         while True:
@@ -195,6 +206,9 @@ class LLMOrchestrator:
                 )
 
             except ProviderRateLimited as exc:
+                # We have exhausted this provider's retry budget.
+                #
+                # The correct internal attribute is _max_429.
                 if attempt >= self._max_429:
                     self._open_provider(
                         provider,
@@ -252,6 +266,7 @@ class LLMOrchestrator:
                 )
 
                 # 413 and 429 are independent failure modes.
+                #
                 # A payload reduction should not consume the 429 budget.
                 attempt = 0
 
@@ -305,8 +320,7 @@ class LLMOrchestrator:
         )
 
         if not state.is_cooling_down:
-            # Cooldown expired. Clear the old state so the provider can
-            # participate normally again.
+            # Cooldown expired. Reset the state.
             if state.cooldown_until:
                 state.cooldown_until = 0.0
 
