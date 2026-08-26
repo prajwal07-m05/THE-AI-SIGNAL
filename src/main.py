@@ -17,6 +17,10 @@ Fast papers dry-run without LLM:
 Disable individual verticals during a full run:
 
     python -m src.main run --no-startups --no-news --no-jobs
+
+Use a separate deduplication ledger:
+
+    python -m src.main run --ledger-path ./out/ledger.final-output.sqlite
 """
 
 from __future__ import annotations
@@ -27,6 +31,7 @@ import time
 
 from rich.console import Console
 
+from src.core.dedupe import DedupeLedger
 from src.core.http_client import AsyncFetcher
 from src.core.logging import configure_logging, get_logger
 from src.llm.orchestrator import LLMOrchestrator
@@ -134,32 +139,40 @@ async def _run(args: argparse.Namespace) -> None:
         else None
     )
 
+    dedupe = DedupeLedger(
+        sqlite_path=args.ledger_path,
+    )
+
     pipe = Pipeline(
         llm=llm,
         use_llm=not args.no_llm,
+        dedupe=dedupe,
     )
 
     started = time.monotonic()
 
-    async with AsyncFetcher() as fetcher:
-        tasks = _build_tasks(
-            args,
-            pipe,
-            fetcher,
-        )
-
-        if not tasks:
-            raise SystemExit(
-                "No ingestion verticals selected. "
-                "Enable at least one vertical or use --only."
+    try:
+        async with AsyncFetcher() as fetcher:
+            tasks = _build_tasks(
+                args,
+                pipe,
+                fetcher,
             )
 
-        # All requested verticals share the same AsyncFetcher, giving them a
-        # common HTTP connection pool, global rate limiter, retry policy and
-        # concurrency controls.
-        await asyncio.gather(
-            *tasks
-        )
+            if not tasks:
+                raise SystemExit(
+                    "No ingestion verticals selected. "
+                    "Enable at least one vertical or use --only."
+                )
+
+            # All requested verticals share the same AsyncFetcher, giving them
+            # a common HTTP connection pool, global rate limiter, retry policy
+            # and concurrency controls.
+            await asyncio.gather(
+                *tasks
+            )
+    finally:
+        dedupe.close()
 
     OutputWriter().write(
         pipe.output,
@@ -309,6 +322,15 @@ def main() -> None:
         "--no-llm",
         action="store_true",
         help="skip LLM structuring/enrichment",
+    )
+
+    run.add_argument(
+        "--ledger-path",
+        default="./out/ledger.sqlite",
+        help=(
+            "SQLite deduplication ledger path; ignored when "
+            "REDIS_URL is configured"
+        ),
     )
 
     args = parser.parse_args()
