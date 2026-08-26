@@ -1,10 +1,21 @@
 """LLM provider adapters with a uniform async interface.
 
-Each provider exposes `async complete_json(system, user) -> dict`. They raise
-`ProviderRateLimited` on 429 and `ProviderPayloadTooLarge` on 413 so the
-orchestrator can decide whether to back off (same provider) or fall through
-(next provider). Providers requiring context beyond their budget are handled by
-the chunker before they are ever called.
+Each provider exposes:
+
+    async complete_json(system, user) -> dict
+
+Providers translate provider-specific failures into a small set of
+pipeline-level exceptions so the orchestrator can implement:
+
+    Gemini -> Groq -> DeepSeek
+
+fallback behavior consistently.
+
+Model IDs are configuration-driven through Settings.
+
+Provider constructors intentionally accept only the API key so the
+provider-chain interface remains backwards compatible with existing
+callers and tests.
 """
 
 from __future__ import annotations
@@ -17,36 +28,79 @@ from typing import Any
 from src.core.logging import get_logger
 from src.settings import get_settings
 
+
 log = get_logger(__name__)
 
 
+# ============================================================================
+# DEFAULT MODEL CONFIGURATION
+# ============================================================================
+
+DEFAULT_GEMINI_MODEL = "gemini-2.5-flash"
+DEFAULT_GROQ_MODEL = "openai/gpt-oss-120b"
+DEFAULT_DEEPSEEK_MODEL = "deepseek-chat"
+
+
+# ============================================================================
+# PROVIDER EXCEPTIONS
+# ============================================================================
+
+
 class ProviderRateLimited(Exception):
-    def __init__(self, retry_after: float | None = None) -> None:
+    """Provider returned a rate-limit response."""
+
+    def __init__(
+        self,
+        retry_after: float | None = None,
+    ) -> None:
         super().__init__("429 rate limited")
         self.retry_after = retry_after
 
 
 class ProviderPayloadTooLarge(Exception):
-    """413 — caller must re-chunk with a smaller budget and retry."""
+    """Provider rejected the request because it was too large."""
 
 
 class ProviderUnavailable(Exception):
-    """Auth/quota/network failure — orchestrator should fall through."""
+    """Provider cannot currently serve the request."""
+
+
+# ============================================================================
+# BASE PROVIDER
+# ============================================================================
 
 
 class LLMProvider(ABC):
+    """Uniform asynchronous interface for all LLM providers."""
+
     name: str
-    #: Maximum input tokens we allow before chunking kicks in.
     max_input_tokens: int
 
     @abstractmethod
-    async def complete_json(self, system: str, user: str) -> dict:
+    async def complete_json(
+        self,
+        system: str,
+        user: str,
+    ) -> dict:
+        """Generate and parse a JSON object."""
         ...
 
     @staticmethod
     def _loads(raw: str) -> dict:
+        """Parse provider output into a JSON object."""
+
         raw = raw.strip()
 
+        if not raw:
+            raise ValueError(
+                "LLM provider returned an empty response"
+            )
+
+        # Support fenced JSON such as:
+        #
+        # ```json
+        # {...}
+        # ```
         if raw.startswith("```"):
             parts = raw.split("```", 2)
 
@@ -59,21 +113,46 @@ class LLMProvider(ABC):
         result = json.loads(raw)
 
         if not isinstance(result, dict):
-            raise ValueError("LLM response must be a JSON object")
+            raise ValueError(
+                "LLM response must be a JSON object"
+            )
 
         return result
 
 
-class GeminiProvider(LLMProvider):
-    """Google Gemini provider using the current google-genai SDK."""
+# ============================================================================
+# GEMINI
+# ============================================================================
 
-    name = "gemini-2.5-flash"
+
+class GeminiProvider(LLMProvider):
+    """Google Gemini provider using the google-genai SDK."""
+
+    name = DEFAULT_GEMINI_MODEL
+
+    # Gemini 2.5 Flash supports a very large context window.
     max_input_tokens = 900_000
 
-    def __init__(self, api_key: str) -> None:
+    def __init__(
+        self,
+        api_key: str,
+    ) -> None:
         from google import genai
 
-        self._client = genai.Client(api_key=api_key)
+        settings = get_settings()
+
+        self.model = (
+            getattr(
+                settings,
+                "gemini_model",
+                DEFAULT_GEMINI_MODEL,
+            )
+            or DEFAULT_GEMINI_MODEL
+        )
+
+        self._client = genai.Client(
+            api_key=api_key,
+        )
 
     async def complete_json(
         self,
@@ -85,7 +164,11 @@ class GeminiProvider(LLMProvider):
         try:
             response = await asyncio.to_thread(
                 self._client.models.generate_content,
-                model=self.name,
+                model=getattr(
+                    self,
+                    "model",
+                    DEFAULT_GEMINI_MODEL,
+                ),
                 contents=[
                     system,
                     user,
@@ -100,37 +183,69 @@ class GeminiProvider(LLMProvider):
 
             return self._loads(text)
 
-        except Exception as e:  # noqa: BLE001
-            status_code = getattr(e, "status_code", None)
+        except Exception as exc:  # noqa: BLE001
+            status_code = getattr(
+                exc,
+                "status_code",
+                None,
+            )
 
-            message = str(e).lower()
+            message = str(exc).lower()
 
-            if status_code == 429 or "429" in message:
-                retry_after = _extract_retry_after(e)
-                raise ProviderRateLimited(
-                    retry_after=retry_after,
-                ) from e
-
-            if (
-                status_code == 413
-                or "413" in message
-                or "payload too large" in message
-                or "request too large" in message
-                or "too large" in message
+            if _is_rate_limited(
+                status_code,
+                message,
             ):
-                raise ProviderPayloadTooLarge() from e
+                raise ProviderRateLimited(
+                    retry_after=_extract_retry_after(exc),
+                ) from exc
 
-            raise ProviderUnavailable(str(e)) from e
+            if _is_payload_too_large(
+                status_code,
+                message,
+            ):
+                raise ProviderPayloadTooLarge() from exc
+
+            raise ProviderUnavailable(
+                str(exc)
+            ) from exc
+
+
+# ============================================================================
+# GROQ
+# ============================================================================
 
 
 class GroqProvider(LLMProvider):
+    """Groq provider."""
+
+    # Kept for compatibility/logging.
     name = "groq-llama-3.3-70b"
+
+    # Groq models have significantly smaller practical input budgets than
+    # Gemini. The orchestrator chunks before sending.
     max_input_tokens = 30_000
 
-    def __init__(self, api_key: str) -> None:
+    def __init__(
+        self,
+        api_key: str,
+    ) -> None:
         from groq import AsyncGroq
 
-        self._client = AsyncGroq(api_key=api_key)
+        settings = get_settings()
+
+        self.model = (
+            getattr(
+                settings,
+                "groq_model",
+                DEFAULT_GROQ_MODEL,
+            )
+            or DEFAULT_GROQ_MODEL
+        )
+
+        self._client = AsyncGroq(
+            api_key=api_key,
+        )
 
     async def complete_json(
         self,
@@ -139,9 +254,25 @@ class GroqProvider(LLMProvider):
     ) -> dict:
         from groq import APIStatusError, RateLimitError
 
+        # IMPORTANT:
+        #
+        # Some unit tests intentionally create the provider with:
+        #
+        #     object.__new__(GroqProvider)
+        #
+        # That bypasses __init__, meaning self.model does not exist.
+        #
+        # getattr() keeps those tests valid without weakening production
+        # configuration.
+        model = getattr(
+            self,
+            "model",
+            DEFAULT_GROQ_MODEL,
+        )
+
         try:
-            resp = await self._client.chat.completions.create(
-                model="llama-3.3-70b-versatile",
+            response = await self._client.chat.completions.create(
+                model=model,
                 messages=[
                     {
                         "role": "system",
@@ -158,37 +289,88 @@ class GroqProvider(LLMProvider):
                 temperature=0,
             )
 
-            return self._loads(
-                resp.choices[0].message.content or "{}"
+            content = (
+                response
+                .choices[0]
+                .message
+                .content
+                or "{}"
             )
 
-        except RateLimitError as e:
-            retry_after = _extract_retry_after(e)
+            return self._loads(content)
 
+        except RateLimitError as exc:
             raise ProviderRateLimited(
-                retry_after=retry_after,
-            ) from e
+                retry_after=_extract_retry_after(exc),
+            ) from exc
 
-        except APIStatusError as e:
-            if e.status_code == 413:
-                raise ProviderPayloadTooLarge() from e
+        except APIStatusError as exc:
+            status_code = getattr(
+                exc,
+                "status_code",
+                None,
+            )
 
-            raise ProviderUnavailable(str(e)) from e
+            message = str(exc).lower()
 
-        except Exception as e:  # noqa: BLE001
-            raise ProviderUnavailable(str(e)) from e
+            if _is_payload_too_large(
+                status_code,
+                message,
+            ):
+                raise ProviderPayloadTooLarge() from exc
+
+            if _is_rate_limited(
+                status_code,
+                message,
+            ):
+                raise ProviderRateLimited(
+                    retry_after=_extract_retry_after(exc),
+                ) from exc
+
+            raise ProviderUnavailable(
+                str(exc)
+            ) from exc
+
+        except Exception as exc:  # noqa: BLE001
+            raise ProviderUnavailable(
+                str(exc)
+            ) from exc
+
+
+# ============================================================================
+# DEEPSEEK
+# ============================================================================
 
 
 class DeepSeekProvider(LLMProvider):
-    name = "deepseek-chat"
+    """DeepSeek provider using its OpenAI-compatible API."""
+
+    name = DEFAULT_DEEPSEEK_MODEL
+
     max_input_tokens = 60_000
 
-    def __init__(self, api_key: str) -> None:
+    BASE_URL = "https://api.deepseek.com"
+
+    def __init__(
+        self,
+        api_key: str,
+    ) -> None:
         from openai import AsyncOpenAI
+
+        settings = get_settings()
+
+        self.model = (
+            getattr(
+                settings,
+                "deepseek_model",
+                DEFAULT_DEEPSEEK_MODEL,
+            )
+            or DEFAULT_DEEPSEEK_MODEL
+        )
 
         self._client = AsyncOpenAI(
             api_key=api_key,
-            base_url="https://api.deepseek.com",
+            base_url=self.BASE_URL,
         )
 
     async def complete_json(
@@ -198,9 +380,19 @@ class DeepSeekProvider(LLMProvider):
     ) -> dict:
         from openai import APIStatusError, RateLimitError
 
+        # Same compatibility protection as GroqProvider.
+        #
+        # Tests can instantiate this class with object.__new__(), bypassing
+        # __init__. Therefore self.model may not exist.
+        model = getattr(
+            self,
+            "model",
+            DEFAULT_DEEPSEEK_MODEL,
+        )
+
         try:
-            resp = await self._client.chat.completions.create(
-                model="deepseek-chat",
+            response = await self._client.chat.completions.create(
+                model=model,
                 messages=[
                     {
                         "role": "system",
@@ -217,60 +409,172 @@ class DeepSeekProvider(LLMProvider):
                 temperature=0,
             )
 
-            return self._loads(
-                resp.choices[0].message.content or "{}"
+            content = (
+                response
+                .choices[0]
+                .message
+                .content
+                or "{}"
             )
 
-        except RateLimitError as e:
-            retry_after = _extract_retry_after(e)
+            return self._loads(content)
 
+        except RateLimitError as exc:
             raise ProviderRateLimited(
-                retry_after=retry_after,
-            ) from e
+                retry_after=_extract_retry_after(exc),
+            ) from exc
 
-        except APIStatusError as e:
-            if e.status_code == 413:
-                raise ProviderPayloadTooLarge() from e
+        except APIStatusError as exc:
+            status_code = getattr(
+                exc,
+                "status_code",
+                None,
+            )
 
-            raise ProviderUnavailable(str(e)) from e
+            message = str(exc).lower()
 
-        except Exception as e:  # noqa: BLE001
-            raise ProviderUnavailable(str(e)) from e
+            if _is_payload_too_large(
+                status_code,
+                message,
+            ):
+                raise ProviderPayloadTooLarge() from exc
+
+            if _is_rate_limited(
+                status_code,
+                message,
+            ):
+                raise ProviderRateLimited(
+                    retry_after=_extract_retry_after(exc),
+                ) from exc
+
+            raise ProviderUnavailable(
+                str(exc)
+            ) from exc
+
+        except Exception as exc:  # noqa: BLE001
+            raise ProviderUnavailable(
+                str(exc)
+            ) from exc
 
 
-def _extract_retry_after(error: Any) -> float | None:
-    """Best-effort extraction of Retry-After from provider exceptions."""
+# ============================================================================
+# ERROR DETECTION
+# ============================================================================
 
-    response = getattr(error, "response", None)
+
+def _is_rate_limited(
+    status_code: Any,
+    message: str,
+) -> bool:
+    """Detect rate-limit responses across provider SDK versions."""
+
+    if status_code == 429:
+        return True
+
+    return (
+        "429" in message
+        or "rate limit" in message
+        or "rate_limit" in message
+        or "too many requests" in message
+        or "quota exceeded" in message
+    )
+
+
+def _is_payload_too_large(
+    status_code: Any,
+    message: str,
+) -> bool:
+    """Detect payload/context-size failures."""
+
+    if status_code == 413:
+        return True
+
+    return (
+        "413" in message
+        or "payload too large" in message
+        or "request too large" in message
+        or "context length" in message
+        or "maximum context" in message
+        or "too many tokens" in message
+        or "input is too long" in message
+        or "input too long" in message
+    )
+
+
+# ============================================================================
+# RETRY-AFTER
+# ============================================================================
+
+
+def _extract_retry_after(
+    error: Any,
+) -> float | None:
+    """Best-effort extraction of Retry-After from SDK exceptions."""
+
+    response = getattr(
+        error,
+        "response",
+        None,
+    )
 
     if response is None:
         return None
 
-    headers = getattr(response, "headers", None)
+    headers = getattr(
+        response,
+        "headers",
+        None,
+    )
 
     if not headers:
         return None
 
-    value = headers.get("retry-after")
+    value = headers.get(
+        "retry-after"
+    )
 
     if value is None:
-        value = headers.get("Retry-After")
+        value = headers.get(
+            "Retry-After"
+        )
 
     if value is None:
         return None
 
     try:
         return float(value)
-    except (TypeError, ValueError):
+    except (
+        TypeError,
+        ValueError,
+    ):
         return None
 
 
+# ============================================================================
+# PROVIDER CHAIN
+# ============================================================================
+
+
 def build_provider_chain() -> list[LLMProvider]:
-    """Instantiate providers in fallback order, skipping any without a key."""
+    """Build the Gemini -> Groq -> DeepSeek fallback chain.
+
+    Providers without configured API keys are skipped.
+
+    IMPORTANT:
+    Provider constructors receive only the API key.
+
+    Model selection happens inside each provider. This preserves the
+    original constructor contract and keeps existing tests/test doubles
+    compatible.
+    """
 
     settings = get_settings()
 
     chain: list[LLMProvider] = []
+
+    # ------------------------------------------------------------------
+    # Gemini
+    # ------------------------------------------------------------------
 
     if settings.gemini_api_key:
         chain.append(
@@ -279,12 +583,20 @@ def build_provider_chain() -> list[LLMProvider]:
             )
         )
 
+    # ------------------------------------------------------------------
+    # Groq
+    # ------------------------------------------------------------------
+
     if settings.groq_api_key:
         chain.append(
             GroqProvider(
                 settings.groq_api_key,
             )
         )
+
+    # ------------------------------------------------------------------
+    # DeepSeek
+    # ------------------------------------------------------------------
 
     if settings.deepseek_api_key:
         chain.append(
@@ -301,7 +613,10 @@ def build_provider_chain() -> list[LLMProvider]:
 
     log.info(
         "llm_chain",
-        providers=[provider.name for provider in chain],
+        providers=[
+            provider.name
+            for provider in chain
+        ],
     )
 
     return chain
