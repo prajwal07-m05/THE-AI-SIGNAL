@@ -29,6 +29,7 @@ from rich.console import Console
 
 from src.core.http_client import AsyncFetcher
 from src.core.logging import configure_logging, get_logger
+from src.llm.orchestrator import LLMOrchestrator
 from src.output.sheets_writer import OutputWriter
 from src.pipeline.runner import Pipeline
 
@@ -127,8 +128,15 @@ def _build_tasks(
 async def _run(args: argparse.Namespace) -> None:
     configure_logging()
 
+    llm = (
+        LLMOrchestrator()
+        if not args.no_llm
+        else None
+    )
+
     pipe = Pipeline(
-        use_llm=not args.no_llm
+        llm=llm,
+        use_llm=not args.no_llm,
     )
 
     started = time.monotonic()
