@@ -1,0 +1,2146 @@
+raw,canonical,method,score
+DoorDash,Doordash,new,0.0
+DoorDash,Doordash,exact,100.0
+Airbnb,Airbnb,new,0.0
+Airbnb,Airbnb,exact,100.0
+Coinbase,Coinbase,new,0.0
+Coinbase,Coinbase,exact,100.0
+Groww,Groww,new,0.0
+Groww,Groww,exact,100.0
+Instacart,Instacart,new,0.0
+Instacart,Instacart,exact,100.0
+Meesho,Meesho,new,0.0
+Meesho,Meesho,exact,100.0
+Oklo,Oklo,new,0.0
+Oklo,Oklo,exact,100.0
+GitLab,Gitlab,new,0.0
+GitLab,Gitlab,exact,100.0
+Rigetti Computing,Rigetti Computing,new,0.0
+Rigetti Computing,Rigetti Computing,exact,100.0
+Dropbox,Dropbox,new,0.0
+Dropbox,Dropbox,exact,100.0
+BillionToOne,Billiontoone,new,0.0
+BillionToOne,Billiontoone,exact,100.0
+EquipmentShare,Equipmentshare,new,0.0
+EquipmentShare,Equipmentshare,exact,100.0
+Matterport,Matterport,new,0.0
+Matterport,Matterport,exact,100.0
+Amplitude,Amplitude,new,0.0
+Amplitude,Amplitude,exact,100.0
+PagerDuty,Pagerduty,new,0.0
+PagerDuty,Pagerduty,exact,100.0
+Weave,Weave,new,0.0
+Weave,Weave,exact,100.0
+Ginkgo Bioworks,Ginkgo Bioworks,new,0.0
+Ginkgo Bioworks,Ginkgo Bioworks,exact,100.0
+Pardes Biosciences,Pardes Biosciences,new,0.0
+Pardes Biosciences,Pardes Biosciences,exact,100.0
+Momentus,Momentus,new,0.0
+Momentus,Momentus,exact,100.0
+Embark Trucks,Embark Trucks,new,0.0
+Embark Trucks,Embark Trucks,exact,100.0
+Lucira Health,Lucira Health,new,0.0
+Lucira Health,Lucira Health,exact,100.0
+Segment,Segment,new,0.0
+Segment,Segment,exact,100.0
+Algolia,Algolia,new,0.0
+Algolia,Algolia,exact,100.0
+Truebill,Truebill,new,0.0
+Truebill,Truebill,exact,100.0
+Twitch,Twitch,new,0.0
+Twitch,Twitch,exact,100.0
+PlanGrid,Plangrid,new,0.0
+PlanGrid,Plangrid,exact,100.0
+Bellabeat,Bellabeat,new,0.0
+Bellabeat,Bellabeat,exact,100.0
+Cruise,Cruise,new,0.0
+Cruise,Cruise,exact,100.0
+Benchling,Benchling,new,0.0
+Benchling,Benchling,exact,100.0
+Casetext,Casetext,new,0.0
+Casetext,Casetext,exact,100.0
+Bird,Bird,new,0.0
+Bird,Bird,exact,100.0
+Brex,Brex,new,0.0
+Brex,Brex,exact,100.0
+The Athletic,The Athletic,new,0.0
+The Athletic,The Athletic,exact,100.0
+Codecademy,Codecademy,new,0.0
+Codecademy,Codecademy,exact,100.0
+Checkr,Checkr,new,0.0
+Checkr,Checkr,exact,100.0
+Lever,Lever,new,0.0
+Lever,Lever,exact,100.0
+Clipboard,Clipboard,new,0.0
+Clipboard,Clipboard,exact,100.0
+Heap,Heap,new,0.0
+Heap,Heap,exact,100.0
+Sendwave,Sendwave,new,0.0
+Sendwave,Sendwave,exact,100.0
+Deel,Deel,new,0.0
+Deel,Deel,exact,100.0
+Clever,Lever,fuzzy,90.9090909090909
+Clever,Lever,fuzzy,90.9090909090909
+Caper,Caper,new,0.0
+Caper,Caper,exact,100.0
+Reddit,Reddit,new,0.0
+Reddit,Reddit,exact,100.0
+Fivestars,Fivestars,new,0.0
+Fivestars,Fivestars,exact,100.0
+Machine Zone,Machine Zone,new,0.0
+Machine Zone,Machine Zone,exact,100.0
+Faire,Faire,new,0.0
+Faire,Faire,exact,100.0
+Fivetran,Fivetran,new,0.0
+Fivetran,Fivetran,exact,100.0
+Optimizely,Optimizely,new,0.0
+Optimizely,Optimizely,exact,100.0
+Flexport,Flexport,new,0.0
+Flexport,Flexport,exact,100.0
+WePay,Wepay,new,0.0
+WePay,Wepay,exact,100.0
+Weebly,Weebly,new,0.0
+Weebly,Weebly,exact,100.0
+Flock Safety,Flock Safety,new,0.0
+Flock Safety,Flock Safety,exact,100.0
+Sqreen,Sqreen,new,0.0
+Sqreen,Sqreen,exact,100.0
+NURX,Nurx,new,0.0
+NURX,Nurx,exact,100.0
+Go1,Go1,new,0.0
+Go1,Go1,exact,100.0
+CoreOS,Coreos,new,0.0
+CoreOS,Coreos,exact,100.0
+Bear Flag Robotics,Bear Flag Robotics,new,0.0
+Bear Flag Robotics,Bear Flag Robotics,exact,100.0
+GOAT Group,Goat Group,new,0.0
+GOAT Group,Goat Group,exact,100.0
+Heroku,Heroku,new,0.0
+Heroku,Heroku,exact,100.0
+GrubMarket,Grubmarket,new,0.0
+GrubMarket,Grubmarket,exact,100.0
+HelloSign,Hellosign,new,0.0
+HelloSign,Hellosign,exact,100.0
+Zenefits,Zenefits,new,0.0
+Zenefits,Zenefits,exact,100.0
+Gusto,Gusto,new,0.0
+Gusto,Gusto,exact,100.0
+Honeylove,Honeylove,new,0.0
+Honeylove,Honeylove,exact,100.0
+Modern Fertility,Modern Fertility,new,0.0
+Modern Fertility,Modern Fertility,exact,100.0
+Cognito,Cognito,new,0.0
+Cognito,Cognito,exact,100.0
+OpenInvest,Openinvest,new,0.0
+OpenInvest,Openinvest,exact,100.0
+Mixpanel,Mixpanel,new,0.0
+Mixpanel,Mixpanel,exact,100.0
+Paystack,Paystack,new,0.0
+Paystack,Paystack,exact,100.0
+Moxion Power Co.,Moxion Power,new,0.0
+Moxion Power Co.,Moxion Power,exact,100.0
+DrChrono,Drchrono,new,0.0
+DrChrono,Drchrono,exact,100.0
+OMGPop,Omgpop,new,0.0
+OMGPop,Omgpop,exact,100.0
+Newfront,Newfront,new,0.0
+Newfront,Newfront,exact,100.0
+North,North,new,0.0
+North,North,exact,100.0
+Nowports,Nowports,new,0.0
+Nowports,Nowports,exact,100.0
+Odeko,Odeko,new,0.0
+Odeko,Odeko,exact,100.0
+GitPrime,Gitprime,new,0.0
+GitPrime,Gitprime,exact,100.0
+Proxy,Proxy,new,0.0
+Proxy,Proxy,exact,100.0
+FutureAdvisor,Futureadvisor,new,0.0
+FutureAdvisor,Futureadvisor,exact,100.0
+Podium,Podium,new,0.0
+Podium,Podium,exact,100.0
+Rappi,Rappi,new,0.0
+Rappi,Rappi,exact,100.0
+Razorpay,Razorpay,new,0.0
+Razorpay,Razorpay,exact,100.0
+Rippling,Rippling,new,0.0
+Rippling,Rippling,exact,100.0
+Scale AI,Scale AI,exact,100.0
+Scale AI,Scale AI,exact,100.0
+Scentbird,Scentbird,new,0.0
+Scentbird,Scentbird,exact,100.0
+Scribd,Scribd,new,0.0
+Scribd,Scribd,exact,100.0
+ShipBob,Shipbob,new,0.0
+ShipBob,Shipbob,exact,100.0
+SmartAsset,Smartasset,new,0.0
+SmartAsset,Smartasset,exact,100.0
+Stripe,Stripe,new,0.0
+Stripe,Stripe,exact,100.0
+Wave,Wave,new,0.0
+Wave,Wave,exact,100.0
+Webflow,Webflow,new,0.0
+Webflow,Webflow,exact,100.0
+Whatnot,Whatnot,new,0.0
+Whatnot,Whatnot,exact,100.0
+Zapier,Zapier,new,0.0
+Zapier,Zapier,exact,100.0
+Zepto,Zepto,new,0.0
+Zepto,Zepto,exact,100.0
+Focal Systems,Focal,new,0.0
+Focal Systems,Focal,exact,100.0
+Mio,Mio,new,0.0
+Mio,Mio,exact,100.0
+Daily,Daily,new,0.0
+Daily,Daily,exact,100.0
+Petcube,Petcube,new,0.0
+Petcube,Petcube,exact,100.0
+Outschool,Outschool,new,0.0
+Outschool,Outschool,exact,100.0
+Mason,Mason,new,0.0
+Mason,Mason,exact,100.0
+MagicBus,Magicbus,new,0.0
+MagicBus,Magicbus,exact,100.0
+Tovala,Tovala,new,0.0
+Tovala,Tovala,exact,100.0
+iSono Health,Isono Health,new,0.0
+iSono Health,Isono Health,exact,100.0
+GetAccept,Getaccept,new,0.0
+GetAccept,Getaccept,exact,100.0
+Chatfuel,Chatfuel,new,0.0
+Chatfuel,Chatfuel,exact,100.0
+Yardbook,Yardbook,new,0.0
+Yardbook,Yardbook,exact,100.0
+GoCardless,Gocardless,new,0.0
+GoCardless,Gocardless,exact,100.0
+Stealth Worker,Stealth Worker,new,0.0
+Stealth Worker,Stealth Worker,exact,100.0
+Deepgram,Deepgram,new,0.0
+Deepgram,Deepgram,exact,100.0
+SOUNDBOKS,Soundboks,new,0.0
+SOUNDBOKS,Soundboks,exact,100.0
+Lattice,Lattice,new,0.0
+Lattice,Lattice,exact,100.0
+Mux,Mux,new,0.0
+Mux,Mux,exact,100.0
+Human Interest,Human Interest,new,0.0
+Human Interest,Human Interest,exact,100.0
+Flirtey (SkyDrop),Flirtey Skydrop,new,0.0
+Flirtey (SkyDrop),Flirtey Skydrop,exact,100.0
+Eight Sleep,Eight Sleep,new,0.0
+Eight Sleep,Eight Sleep,exact,100.0
+Instawork,Instawork,new,0.0
+Instawork,Instawork,exact,100.0
+Cofactor Genomics,Cofactor Genomics,new,0.0
+Cofactor Genomics,Cofactor Genomics,exact,100.0
+Bitmovin,Bitmovin,new,0.0
+Bitmovin,Bitmovin,exact,100.0
+TetraScience,Tetrascience,new,0.0
+TetraScience,Tetrascience,exact,100.0
+The Ticket Fairy,The Ticket Fairy,new,0.0
+The Ticket Fairy,The Ticket Fairy,exact,100.0
+Font Awesome,Font Awesome,new,0.0
+Font Awesome,Font Awesome,exact,100.0
+"80,000 Hours",80 000 Hours,new,0.0
+"80,000 Hours",80 000 Hours,exact,100.0
+Xendit,Xendit,new,0.0
+Xendit,Xendit,exact,100.0
+Shred Video,Shred Video,new,0.0
+Shred Video,Shred Video,exact,100.0
+Shape (ShapeScale),Shape Shapescale,new,0.0
+Shape (ShapeScale),Shape Shapescale,exact,100.0
+RedCarpetUp,Redcarpetup,new,0.0
+RedCarpetUp,Redcarpetup,exact,100.0
+Plate IQ,Plate Iq,new,0.0
+Plate IQ,Plate Iq,exact,100.0
+PickTrace,Picktrace,new,0.0
+PickTrace,Picktrace,exact,100.0
+Fountain,Fountain,new,0.0
+Fountain,Fountain,exact,100.0
+Microhealth,Microhealth,new,0.0
+Microhealth,Microhealth,exact,100.0
+Zeplin,Zeplin,new,0.0
+Zeplin,Zeplin,exact,100.0
+Markhor,Markhor,new,0.0
+Markhor,Markhor,exact,100.0
+Circle Medical,Circle Medical,new,0.0
+Circle Medical,Circle Medical,exact,100.0
+GiveCampus,Givecampus,new,0.0
+GiveCampus,Givecampus,exact,100.0
+Drip Capital,Drip Capital,new,0.0
+Drip Capital,Drip Capital,exact,100.0
+Chaldal,Chaldal,new,0.0
+Chaldal,Chaldal,exact,100.0
+Clerky,Clerky,new,0.0
+Clerky,Clerky,exact,100.0
+Bodyport,Bodyport,new,0.0
+Bodyport,Bodyport,exact,100.0
+Verge Genomics,Verge Genomics,new,0.0
+Verge Genomics,Verge Genomics,exact,100.0
+Thrive Agritech,Thrive Agritech,new,0.0
+Thrive Agritech,Thrive Agritech,exact,100.0
+Tesorio,Tesorio,new,0.0
+Tesorio,Tesorio,exact,100.0
+AgileMD,Agilemd,new,0.0
+AgileMD,Agilemd,exact,100.0
+Reach,Reach,new,0.0
+Reach,Reach,exact,100.0
+SunFarmer,Sunfarmer,new,0.0
+SunFarmer,Sunfarmer,exact,100.0
+Confident LIMS,Confident Lims,new,0.0
+Confident LIMS,Confident Lims,exact,100.0
+Branch8,Branch8,new,0.0
+Branch8,Branch8,exact,100.0
+Heroic Labs,Heroic,new,0.0
+Heroic Labs,Heroic,exact,100.0
+SnapMagic,Snapmagic,new,0.0
+SnapMagic,Snapmagic,exact,100.0
+Assembly,AssemblyAI,alias,100.0
+Assembly,AssemblyAI,alias,100.0
+Gemnote,Gemnote,new,0.0
+Gemnote,Gemnote,exact,100.0
+New Story,New Story,new,0.0
+New Story,New Story,exact,100.0
+Ironclad,Ironclad,new,0.0
+Ironclad,Ironclad,exact,100.0
+Leaders In Tech,Leaders In Tech,new,0.0
+Leaders In Tech,Leaders In Tech,exact,100.0
+teaBOT,Teabot,new,0.0
+teaBOT,Teabot,exact,100.0
+Teleport,Teleport,new,0.0
+Teleport,Teleport,exact,100.0
+Lugg,Lugg,new,0.0
+Lugg,Lugg,exact,100.0
+Shasqi,Shasqi,new,0.0
+Shasqi,Shasqi,exact,100.0
+Mashgin,Mashgin,new,0.0
+Mashgin,Mashgin,exact,100.0
+NimbleRx,Nimblerx,new,0.0
+NimbleRx,Nimblerx,exact,100.0
+Quartzy,Quartzy,new,0.0
+Quartzy,Quartzy,exact,100.0
+Replika,Replika,new,0.0
+Replika,Replika,exact,100.0
+Tara AI,Tara,new,0.0
+Tara AI,Tara,exact,100.0
+Flip,Flip,new,0.0
+Flip,Flip,exact,100.0
+X-Zell,xAI,fuzzy,100.0
+X-Zell,xAI,fuzzy,100.0
+Zenflow,Zenflow,new,0.0
+Zenflow,Zenflow,exact,100.0
+Tab,Tabnine,fuzzy,100.0
+Tab,Tabnine,fuzzy,100.0
+Streak,Streak,new,0.0
+Streak,Streak,exact,100.0
+Meadow,Meadow,new,0.0
+Meadow,Meadow,exact,100.0
+Level Frames,Level Frames,new,0.0
+Level Frames,Level Frames,exact,100.0
+Industrial Microbes,Industrial Microbes,new,0.0
+Industrial Microbes,Industrial Microbes,exact,100.0
+Giveffect,Giveffect,new,0.0
+Giveffect,Giveffect,exact,100.0
+eBrandvalue,Ebrandvalue,new,0.0
+eBrandvalue,Ebrandvalue,exact,100.0
+Quantierra,Quantierra,new,0.0
+Quantierra,Quantierra,exact,100.0
+Cleanly,Cleanly,new,0.0
+Cleanly,Cleanly,exact,100.0
+Resolve,Resolve,new,0.0
+Resolve,Resolve,exact,100.0
+Makrwatch,Makrwatch,new,0.0
+Makrwatch,Makrwatch,exact,100.0
+TeamNote,Teamnote,new,0.0
+TeamNote,Teamnote,exact,100.0
+Tempo,Tempo,new,0.0
+Tempo,Tempo,exact,100.0
+SIRUM,Sirum,new,0.0
+SIRUM,Sirum,exact,100.0
+Sails Co.,Sails,new,0.0
+Sails Co.,Sails,exact,100.0
+ReadMe,Readme,new,0.0
+ReadMe,Readme,exact,100.0
+BuildScience,Buildscience,new,0.0
+BuildScience,Buildscience,exact,100.0
+Platzi,Platzi,new,0.0
+Platzi,Platzi,exact,100.0
+Labdoor,Labdoor,new,0.0
+Labdoor,Labdoor,exact,100.0
+GiveMeTap,Givemetap,new,0.0
+GiveMeTap,Givemetap,exact,100.0
+Bankjoy,Bankjoy,new,0.0
+Bankjoy,Bankjoy,exact,100.0
+Zeitview,Zeitview,new,0.0
+Zeitview,Zeitview,exact,100.0
+The Human Utility,The Human Utility,new,0.0
+The Human Utility,The Human Utility,exact,100.0
+Democracy Earth,Democracy Earth,new,0.0
+Democracy Earth,Democracy Earth,exact,100.0
+OneSignal,Onesignal,new,0.0
+OneSignal,Onesignal,exact,100.0
+Numerion Labs,Numerion,new,0.0
+Numerion Labs,Numerion,exact,100.0
+Bright,Bright,new,0.0
+Bright,Bright,exact,100.0
+Magic,Magic,new,0.0
+Magic,Magic,exact,100.0
+Mezmo,Mezmo,new,0.0
+Mezmo,Mezmo,exact,100.0
+Akido Labs,Akido,new,0.0
+Akido Labs,Akido,exact,100.0
+Qventus,Qventus,new,0.0
+Qventus,Qventus,exact,100.0
+Bayes Impact,Bayes Impact,new,0.0
+Bayes Impact,Bayes Impact,exact,100.0
+Helion Energy,Helion Energy,new,0.0
+Helion Energy,Helion Energy,exact,100.0
+HackerRank,Hackerrank,new,0.0
+HackerRank,Hackerrank,exact,100.0
+Front,Front,new,0.0
+Front,Front,exact,100.0
+Apollo,Apollo,new,0.0
+Apollo,Apollo,exact,100.0
+Roomstorm,Roomstorm,new,0.0
+Roomstorm,Roomstorm,exact,100.0
+Hive,Hive,new,0.0
+Hive,Hive,exact,100.0
+SpotAngels,Spotangels,new,0.0
+SpotAngels,Spotangels,exact,100.0
+UserGems,Usergems,new,0.0
+UserGems,Usergems,exact,100.0
+SFOX,Sfox,new,0.0
+SFOX,Sfox,exact,100.0
+PicnicAI,Picnicai,new,0.0
+PicnicAI,Picnicai,exact,100.0
+Permutive,Permutive,new,0.0
+Permutive,Permutive,exact,100.0
+Alchemy,Alchemy,new,0.0
+Alchemy,Alchemy,exact,100.0
+MTailor,Mtailor,new,0.0
+MTailor,Mtailor,exact,100.0
+MetricWire,Metricwire,new,0.0
+MetricWire,Metricwire,exact,100.0
+Protocol Labs,Protocol,new,0.0
+Protocol Labs,Protocol,exact,100.0
+Greentoe,Greentoe,new,0.0
+Greentoe,Greentoe,exact,100.0
+Hyperpad,Hyperpad,new,0.0
+Hyperpad,Hyperpad,exact,100.0
+Flaviar,Flaviar,new,0.0
+Flaviar,Flaviar,exact,100.0
+Clear,Clear,new,0.0
+Clear,Clear,exact,100.0
+Backpack,Backpack,new,0.0
+Backpack,Backpack,exact,100.0
+Immunity Project,Immunity Project,new,0.0
+Immunity Project,Immunity Project,exact,100.0
+Dyspatch,Dyspatch,new,0.0
+Dyspatch,Dyspatch,exact,100.0
+OpenCurriculum,Opencurriculum,new,0.0
+OpenCurriculum,Opencurriculum,exact,100.0
+MixerBox,Mixerbox,new,0.0
+MixerBox,Mixerbox,exact,100.0
+Y Combinator,Y Combinator,new,0.0
+Y Combinator,Y Combinator,exact,100.0
+GBatteries,Gbatteries,new,0.0
+GBatteries,Gbatteries,exact,100.0
+Zinc,Zinc,new,0.0
+Zinc,Zinc,exact,100.0
+Zidisha,Zidisha,new,0.0
+Zidisha,Zidisha,exact,100.0
+TrueVault,Truevault,new,0.0
+TrueVault,Truevault,exact,100.0
+Guesty,Guesty,new,0.0
+Guesty,Guesty,exact,100.0
+Snapdocs,Snapdocs,new,0.0
+Snapdocs,Snapdocs,exact,100.0
+Medmonk,Medmonk,new,0.0
+Medmonk,Medmonk,exact,100.0
+Shoobs,Shoobs,new,0.0
+Shoobs,Shoobs,exact,100.0
+Pushbullet,Pushbullet,new,0.0
+Pushbullet,Pushbullet,exact,100.0
+Povio,Povio,new,0.0
+Povio,Povio,exact,100.0
+PiinPoint,Piinpoint,new,0.0
+PiinPoint,Piinpoint,exact,100.0
+One Degree,One Degree,new,0.0
+One Degree,One Degree,exact,100.0
+MBX,Mbx,new,0.0
+MBX,Mbx,exact,100.0
+Emailio,Emailio,new,0.0
+Emailio,Emailio,exact,100.0
+CodeNow,Codenow,new,0.0
+CodeNow,Codenow,exact,100.0
+CodeCombat,Codecombat,new,0.0
+CodeCombat,Codecombat,exact,100.0
+Noora Health,Noora Health,new,0.0
+Noora Health,Noora Health,exact,100.0
+Cambly,Cambly,new,0.0
+Cambly,Cambly,exact,100.0
+AptDeco,Aptdeco,new,0.0
+AptDeco,Aptdeco,exact,100.0
+CareMessage,Caremessage,new,0.0
+CareMessage,Caremessage,exact,100.0
+Ambition,Ambition,new,0.0
+Ambition,Ambition,exact,100.0
+AirHelp,Airhelp,new,0.0
+AirHelp,Airhelp,exact,100.0
+42,42,new,0.0
+42,42,exact,100.0
+True Link,True Link,new,0.0
+True Link,True Link,exact,100.0
+Reebee,Reebee,new,0.0
+Reebee,Reebee,exact,100.0
+Lob,Lob,new,0.0
+Lob,Lob,exact,100.0
+Panorama Education,Panorama Education,new,0.0
+Panorama Education,Panorama Education,exact,100.0
+Cratejoy,Cratejoy,new,0.0
+Cratejoy,Cratejoy,exact,100.0
+"Estimote, Inc.",Estimote,new,0.0
+"Estimote, Inc.",Estimote,exact,100.0
+EasyPost,Easypost,new,0.0
+EasyPost,Easypost,exact,100.0
+Asseta,Asseta,new,0.0
+Asseta,Asseta,exact,100.0
+Per Vices,Per Vices,new,0.0
+Per Vices,Per Vices,exact,100.0
+7cups,7Cups,new,0.0
+7cups,7Cups,exact,100.0
+Watsi,Watsi,new,0.0
+Watsi,Watsi,exact,100.0
+Goldbelly,Goldbelly,new,0.0
+Goldbelly,Goldbelly,exact,100.0
+Wevorce,Wevorce,new,0.0
+Wevorce,Wevorce,exact,100.0
+Wefunder,Wefunder,new,0.0
+Wefunder,Wefunder,exact,100.0
+SimplyInsured,Simplyinsured,new,0.0
+SimplyInsured,Simplyinsured,exact,100.0
+CircuitHub,Circuithub,new,0.0
+CircuitHub,Circuithub,exact,100.0
+Experiment,Experiment,new,0.0
+Experiment,Experiment,exact,100.0
+RADAR,Radar,new,0.0
+RADAR,Radar,exact,100.0
+Lollipuff,Lollipuff,new,0.0
+Lollipuff,Lollipuff,exact,100.0
+Strikingly,Strikingly,new,0.0
+Strikingly,Strikingly,exact,100.0
+InfluxData,Influxdata,new,0.0
+InfluxData,Influxdata,exact,100.0
+Etleap,Etleap,new,0.0
+Etleap,Etleap,exact,100.0
+Cheetah,Cheetah,new,0.0
+Cheetah,Cheetah,exact,100.0
+Lawdingo,Lawdingo,new,0.0
+Lawdingo,Lawdingo,exact,100.0
+Padlet,Padlet,new,0.0
+Padlet,Padlet,exact,100.0
+BuildZoom,Buildzoom,new,0.0
+BuildZoom,Buildzoom,exact,100.0
+CircuitLab,Circuitlab,new,0.0
+CircuitLab,Circuitlab,exact,100.0
+StyleUp,Styleup,new,0.0
+StyleUp,Styleup,exact,100.0
+9gag,9Gag,new,0.0
+9gag,9Gag,exact,100.0
+Svbtle,Svbtle,new,0.0
+Svbtle,Svbtle,exact,100.0
+Plivo,Plivo,new,0.0
+Plivo,Plivo,exact,100.0
+Double Robotics,Double Robotics,new,0.0
+Double Robotics,Double Robotics,exact,100.0
+Vastrm,Vastrm,new,0.0
+Vastrm,Vastrm,exact,100.0
+Flightfox,Flightfox,new,0.0
+Flightfox,Flightfox,exact,100.0
+BackerKit,Backerkit,new,0.0
+BackerKit,Backerkit,exact,100.0
+Submittable,Submittable,new,0.0
+Submittable,Submittable,exact,100.0
+NewsBlur,Newsblur,new,0.0
+NewsBlur,Newsblur,exact,100.0
+OctaveWealth,Octavewealth,new,0.0
+OctaveWealth,Octavewealth,exact,100.0
+Upwave,Upwave,new,0.0
+Upwave,Upwave,exact,100.0
+Eligible,Eligible,new,0.0
+Eligible,Eligible,exact,100.0
+FundersClub,Fundersclub,new,0.0
+FundersClub,Fundersclub,exact,100.0
+Zentail,Zentail,new,0.0
+Zentail,Zentail,exact,100.0
+Mattermost,Mattermost,new,0.0
+Mattermost,Mattermost,exact,100.0
+HealthSherpa,Healthsherpa,new,0.0
+HealthSherpa,Healthsherpa,exact,100.0
+Human Dx,Human Dx,new,0.0
+Human Dx,Human Dx,exact,100.0
+Mth Sense,Mth Sense,new,0.0
+Mth Sense,Mth Sense,exact,100.0
+Rainforest,Rainforest,new,0.0
+Rainforest,Rainforest,exact,100.0
+Redoubt Insurance,Redoubt Insurance,new,0.0
+Redoubt Insurance,Redoubt Insurance,exact,100.0
+antimattr,Antimattr,new,0.0
+antimattr,Antimattr,exact,100.0
+Covera,Covera,new,0.0
+Covera,Covera,exact,100.0
+Vorelios,Vorelios,new,0.0
+Vorelios,Vorelios,exact,100.0
+Hemlock,Hemlock,new,0.0
+Hemlock,Hemlock,exact,100.0
+Antropi Robotics,Antropi Robotics,new,0.0
+Antropi Robotics,Antropi Robotics,exact,100.0
+Lantern AI,Lantern,new,0.0
+Lantern AI,Lantern,exact,100.0
+Forward,Forward,new,0.0
+Forward,Forward,exact,100.0
+Capveon,Capveon,new,0.0
+Capveon,Capveon,exact,100.0
+Screenleap,Screenleap,new,0.0
+Screenleap,Screenleap,exact,100.0
+Qokedas,Qokedas,new,0.0
+Qokedas,Qokedas,exact,100.0
+Veeza AI,Veeza,new,0.0
+Veeza AI,Veeza,exact,100.0
+Buxfer,Buxfer,new,0.0
+Buxfer,Buxfer,exact,100.0
+Simulithic,Simulithic,new,0.0
+Simulithic,Simulithic,exact,100.0
+Sentient OS,Sentient Os,new,0.0
+Sentient OS,Sentient Os,exact,100.0
+herdr,Herdr,new,0.0
+herdr,Herdr,exact,100.0
+Lambda Robotics,Lambda Robotics,new,0.0
+Lambda Robotics,Lambda Robotics,exact,100.0
+Virtualmin,Virtualmin,new,0.0
+Virtualmin,Virtualmin,exact,100.0
+OpenTag,Opentag,new,0.0
+OpenTag,Opentag,exact,100.0
+Conifer,Conifer,new,0.0
+Conifer,Conifer,exact,100.0
+Simantic,Simantic,new,0.0
+Simantic,Simantic,exact,100.0
+Experiential Labs,Experiential,new,0.0
+Experiential Labs,Experiential,exact,100.0
+Edviro,Edviro,new,0.0
+Edviro,Edviro,exact,100.0
+Lightfield,Lightfield,new,0.0
+Lightfield,Lightfield,exact,100.0
+CoArena,Coarena,new,0.0
+CoArena,Coarena,exact,100.0
+Caution,Caution,new,0.0
+Caution,Caution,exact,100.0
+Magma,Magma,new,0.0
+Magma,Magma,exact,100.0
+Atomarine,Atomarine,new,0.0
+Atomarine,Atomarine,exact,100.0
+Billow AI Labs,Billow,new,0.0
+Billow AI Labs,Billow,exact,100.0
+hardware intelligence,Hardware Intelligence,new,0.0
+hardware intelligence,Hardware Intelligence,exact,100.0
+Osseus,Osseus,new,0.0
+Osseus,Osseus,exact,100.0
+Allia Health,Allia Health,new,0.0
+Allia Health,Allia Health,exact,100.0
+Salem Robotics Inc,Salem Robotics,new,0.0
+Salem Robotics Inc,Salem Robotics,exact,100.0
+Robocurve,Robocurve,new,0.0
+Robocurve,Robocurve,exact,100.0
+hiloop,Hiloop,new,0.0
+hiloop,Hiloop,exact,100.0
+Snap Poker,Snap Poker,new,0.0
+Snap Poker,Snap Poker,exact,100.0
+Dawn Industries,Dawn Industries,new,0.0
+Dawn Industries,Dawn Industries,exact,100.0
+Nex,Nex,new,0.0
+Nex,Nex,exact,100.0
+OneCLI,Onecli,new,0.0
+OneCLI,Onecli,exact,100.0
+"Vernius Systems, Inc.",Vernius,new,0.0
+"Vernius Systems, Inc.",Vernius,exact,100.0
+Wondering,Wondering,new,0.0
+Wondering,Wondering,exact,100.0
+Tracer,Tracer,new,0.0
+Tracer,Tracer,exact,100.0
+Amulet,Amulet,new,0.0
+Amulet,Amulet,exact,100.0
+Avoca Systems,Avoca,new,0.0
+Avoca Systems,Avoca,exact,100.0
+SubVysion,Subvysion,new,0.0
+SubVysion,Subvysion,exact,100.0
+Ethos Space Resources,Ethos Space Resources,new,0.0
+Ethos Space Resources,Ethos Space Resources,exact,100.0
+"SpaceFlow Technologies, Inc.",Spaceflow,new,0.0
+"SpaceFlow Technologies, Inc.",Spaceflow,exact,100.0
+Petrarch,Petrarch,new,0.0
+Petrarch,Petrarch,exact,100.0
+Locke,Locke,new,0.0
+Locke,Locke,exact,100.0
+Florin,Florin,new,0.0
+Florin,Florin,exact,100.0
+Earendil Robotics,Earendil Robotics,new,0.0
+Earendil Robotics,Earendil Robotics,exact,100.0
+Hebbian Robotics,Hebbian Robotics,new,0.0
+Hebbian Robotics,Hebbian Robotics,exact,100.0
+PRINCEPS,Princeps,new,0.0
+PRINCEPS,Princeps,exact,100.0
+Hop Aero,Hop Aero,new,0.0
+Hop Aero,Hop Aero,exact,100.0
+Agent FM,Agent Fm,new,0.0
+Agent FM,Agent Fm,exact,100.0
+OpenRelay,Openrelay,new,0.0
+OpenRelay,Openrelay,exact,100.0
+Dock,Dock,new,0.0
+Dock,Dock,exact,100.0
+Verdict Machine,Verdict Machine,new,0.0
+Verdict Machine,Verdict Machine,exact,100.0
+TovenAI,Tovenai,new,0.0
+TovenAI,Tovenai,exact,100.0
+HyperProbe,Hyperprobe,new,0.0
+HyperProbe,Hyperprobe,exact,100.0
+Grip,Grip,new,0.0
+Grip,Grip,exact,100.0
+Skymerse,Skymerse,new,0.0
+Skymerse,Skymerse,exact,100.0
+Hubble,Hubble,new,0.0
+Hubble,Hubble,exact,100.0
+Palisade,Palisade,new,0.0
+Palisade,Palisade,exact,100.0
+83 Sciences,83 Sciences,new,0.0
+83 Sciences,83 Sciences,exact,100.0
+Chromie,Chromie,new,0.0
+Chromie,Chromie,exact,100.0
+Lamb Labs,Lamb,new,0.0
+Lamb Labs,Lamb,exact,100.0
+Shiraz AI,Shiraz,new,0.0
+Shiraz AI,Shiraz,exact,100.0
+Mireye,Mireye,new,0.0
+Mireye,Mireye,exact,100.0
+Touchy,Touchy,new,0.0
+Touchy,Touchy,exact,100.0
+Derya,Derya,new,0.0
+Derya,Derya,exact,100.0
+Pennant,Pennant,new,0.0
+Pennant,Pennant,exact,100.0
+Decawork,Decawork,new,0.0
+Decawork,Decawork,exact,100.0
+CarSignal,Carsignal,new,0.0
+CarSignal,Carsignal,exact,100.0
+Axelrod,Axelrod,new,0.0
+Axelrod,Axelrod,exact,100.0
+Levocred AI,Levocred,new,0.0
+Levocred AI,Levocred,exact,100.0
+Praxis Robotics,Praxis Robotics,new,0.0
+Praxis Robotics,Praxis Robotics,exact,100.0
+Care GP,Care Gp,new,0.0
+Care GP,Care Gp,exact,100.0
+Radley,Radley,new,0.0
+Radley,Radley,exact,100.0
+Agnost AI,Agnost,new,0.0
+Agnost AI,Agnost,exact,100.0
+Agentcard,Agentcard,new,0.0
+Agentcard,Agentcard,exact,100.0
+ProvenMetal,Provenmetal,new,0.0
+ProvenMetal,Provenmetal,exact,100.0
+Gamgee,Gamgee,new,0.0
+Gamgee,Gamgee,exact,100.0
+Inkbox,Inkbox,new,0.0
+Inkbox,Inkbox,exact,100.0
+Cosmic Robotics,Cosmic Robotics,new,0.0
+Cosmic Robotics,Cosmic Robotics,exact,100.0
+Markov,Markov,new,0.0
+Markov,Markov,exact,100.0
+Familiar,Familiar,new,0.0
+Familiar,Familiar,exact,100.0
+Lumeria,Lumeria,new,0.0
+Lumeria,Lumeria,exact,100.0
+Marengo,Marengo,new,0.0
+Marengo,Marengo,exact,100.0
+RonanRx Inc.,Ronanrx,new,0.0
+RonanRx Inc.,Ronanrx,exact,100.0
+Waybill,Waybill,new,0.0
+Waybill,Waybill,exact,100.0
+Executor,Executor,new,0.0
+Executor,Executor,exact,100.0
+Last Accounting Company,Last Accounting,new,0.0
+Last Accounting Company,Last Accounting,exact,100.0
+Pacific,Pacific,new,0.0
+Pacific,Pacific,exact,100.0
+Luca IQ,Luca Iq,new,0.0
+Luca IQ,Luca Iq,exact,100.0
+Financial Datasets,Financial Datasets,new,0.0
+Financial Datasets,Financial Datasets,exact,100.0
+TryNearby,Trynearby,new,0.0
+TryNearby,Trynearby,exact,100.0
+Computable,Computable,new,0.0
+Computable,Computable,exact,100.0
+Denta,Denta,new,0.0
+Denta,Denta,exact,100.0
+Isengard Industries Inc,Isengard Industries,new,0.0
+Isengard Industries Inc,Isengard Industries,exact,100.0
+Ekho Labs,Ekho,new,0.0
+Ekho Labs,Ekho,exact,100.0
+Moving Atoms,Moving Atoms,new,0.0
+Moving Atoms,Moving Atoms,exact,100.0
+Vestris,Vestris,new,0.0
+Vestris,Vestris,exact,100.0
+Ultrasonium,Ultrasonium,new,0.0
+Ultrasonium,Ultrasonium,exact,100.0
+Arbital,Arbital,new,0.0
+Arbital,Arbital,exact,100.0
+PokerClubHub,Pokerclubhub,new,0.0
+PokerClubHub,Pokerclubhub,exact,100.0
+Neuron Industries,Neuron Industries,new,0.0
+Neuron Industries,Neuron Industries,exact,100.0
+Neuromorphic,Neuromorphic,new,0.0
+Neuromorphic,Neuromorphic,exact,100.0
+LATO,Lato,new,0.0
+LATO,Lato,exact,100.0
+Risklytics,Risklytics,new,0.0
+Risklytics,Risklytics,exact,100.0
+Daqstra,Daqstra,new,0.0
+Daqstra,Daqstra,exact,100.0
+Tenor,Tenor,new,0.0
+Tenor,Tenor,exact,100.0
+Qlo,Qlo,new,0.0
+Qlo,Qlo,exact,100.0
+Fabraix,Fabraix,new,0.0
+Fabraix,Fabraix,exact,100.0
+Omanta,Omanta,new,0.0
+Omanta,Omanta,exact,100.0
+Rational,Rational,new,0.0
+Rational,Rational,exact,100.0
+Aktoria Robotics,Aktoria Robotics,new,0.0
+Aktoria Robotics,Aktoria Robotics,exact,100.0
+Vendo,Vendo,new,0.0
+Vendo,Vendo,exact,100.0
+Akon Labs,Akon,new,0.0
+Akon Labs,Akon,exact,100.0
+Click,Click,new,0.0
+Click,Click,exact,100.0
+Whitespace,Whitespace,new,0.0
+Whitespace,Whitespace,exact,100.0
+Blue Frog Gaming,Blue Frog Gaming,new,0.0
+Blue Frog Gaming,Blue Frog Gaming,exact,100.0
+Almanac,Almanac,new,0.0
+Almanac,Almanac,exact,100.0
+TareBio,Tarebio,new,0.0
+TareBio,Tarebio,exact,100.0
+Greypoint Industries,Greypoint Industries,new,0.0
+Greypoint Industries,Greypoint Industries,exact,100.0
+Hilstart,Hilstart,new,0.0
+Hilstart,Hilstart,exact,100.0
+Aerogen Systems,Aerogen,new,0.0
+Aerogen Systems,Aerogen,exact,100.0
+Graphify Labs,Graphify,new,0.0
+Graphify Labs,Graphify,exact,100.0
+Ooak Data,Ooak Data,new,0.0
+Ooak Data,Ooak Data,exact,100.0
+Nori,Nori,new,0.0
+Nori,Nori,exact,100.0
+6thSense,6Thsense,new,0.0
+6thSense,6Thsense,exact,100.0
+Bloomy,Bloomy,new,0.0
+Bloomy,Bloomy,exact,100.0
+machine0,Machine0,new,0.0
+machine0,Machine0,exact,100.0
+Pluto,Pluto,new,0.0
+Pluto,Pluto,exact,100.0
+FlowManual,Flowmanual,new,0.0
+FlowManual,Flowmanual,exact,100.0
+Stratum Industries,Stratum Industries,new,0.0
+Stratum Industries,Stratum Industries,exact,100.0
+Peer,Peer,new,0.0
+Peer,Peer,exact,100.0
+Molagri,Molagri,new,0.0
+Molagri,Molagri,exact,100.0
+Cerenovus,Cerenovus,new,0.0
+Cerenovus,Cerenovus,exact,100.0
+Agency Tool Company,Agency Tool,new,0.0
+Agency Tool Company,Agency Tool,exact,100.0
+Standard Machines,Standard Machines,new,0.0
+Standard Machines,Standard Machines,exact,100.0
+EdotEnv,Edotenv,new,0.0
+EdotEnv,Edotenv,exact,100.0
+Traceforce,Traceforce,new,0.0
+Traceforce,Traceforce,exact,100.0
+Veltha,Veltha,new,0.0
+Veltha,Veltha,exact,100.0
+Tarifflo Inc.,Tarifflo,new,0.0
+Tarifflo Inc.,Tarifflo,exact,100.0
+Callbook AI,Callbook,new,0.0
+Callbook AI,Callbook,exact,100.0
+Definite,Definite,new,0.0
+Definite,Definite,exact,100.0
+Alkera AI,Alkera,new,0.0
+Alkera AI,Alkera,exact,100.0
+Rasyn,Rasyn,new,0.0
+Rasyn,Rasyn,exact,100.0
+Manifold,Manifold,new,0.0
+Manifold,Manifold,exact,100.0
+screenpipe,Screenpipe,new,0.0
+screenpipe,Screenpipe,exact,100.0
+Spectre Intelligence,Spectre Intelligence,new,0.0
+Spectre Intelligence,Spectre Intelligence,exact,100.0
+Zaplar,Zaplar,new,0.0
+Zaplar,Zaplar,exact,100.0
+Prodigy Research,Prodigy Research,new,0.0
+Prodigy Research,Prodigy Research,exact,100.0
+Touchmark,Touchmark,new,0.0
+Touchmark,Touchmark,exact,100.0
+Exosat,Exosat,new,0.0
+Exosat,Exosat,exact,100.0
+Codag,Codag,new,0.0
+Codag,Codag,exact,100.0
+Context.dev,Context Dev,new,0.0
+Context.dev,Context Dev,exact,100.0
+Glen,Glen,new,0.0
+Glen,Glen,exact,100.0
+Stoa,Stoa,new,0.0
+Stoa,Stoa,exact,100.0
+Marble,Marble,new,0.0
+Marble,Marble,exact,100.0
+Audun,Audun,new,0.0
+Audun,Audun,exact,100.0
+Grocalo,Grocalo,new,0.0
+Grocalo,Grocalo,exact,100.0
+COACH,Coach,new,0.0
+COACH,Coach,exact,100.0
+DeepReach Inc.,Deepreach,new,0.0
+DeepReach Inc.,Deepreach,exact,100.0
+MOCHI.TV,Mochi Tv,new,0.0
+MOCHI.TV,Mochi Tv,exact,100.0
+Alloovium,Alloovium,new,0.0
+Alloovium,Alloovium,exact,100.0
+Dialogus,Dialogus,new,0.0
+Dialogus,Dialogus,exact,100.0
+Mosaic,Mosaic,new,0.0
+Mosaic,Mosaic,exact,100.0
+Bizmark,Bizmark,new,0.0
+Bizmark,Bizmark,exact,100.0
+Riften,Riften,new,0.0
+Riften,Riften,exact,100.0
+Buildbox,Buildbox,new,0.0
+Buildbox,Buildbox,exact,100.0
+RealPact,Realpact,new,0.0
+RealPact,Realpact,exact,100.0
+GUILD,Guild,new,0.0
+GUILD,Guild,exact,100.0
+Floracene,Floracene,new,0.0
+Floracene,Floracene,exact,100.0
+Rise Reforming,Rise Reforming,new,0.0
+Rise Reforming,Rise Reforming,exact,100.0
+Lyon,Lyon,new,0.0
+Lyon,Lyon,exact,100.0
+Instaplay,Instaplay,new,0.0
+Instaplay,Instaplay,exact,100.0
+Verdant,Verdant,new,0.0
+Verdant,Verdant,exact,100.0
+IMPACT Drones,Impact Drones,new,0.0
+IMPACT Drones,Impact Drones,exact,100.0
+Insurf,Insurf,new,0.0
+Insurf,Insurf,exact,100.0
+Jcode,Jcode,new,0.0
+Jcode,Jcode,exact,100.0
+LemonLime,Lemonlime,new,0.0
+LemonLime,Lemonlime,exact,100.0
+Gutgutgoose,Gutgutgoose,new,0.0
+Gutgutgoose,Gutgutgoose,exact,100.0
+Speko,Speko,new,0.0
+Speko,Speko,exact,100.0
+Synapse Semiconductor,Synapse Semiconductor,new,0.0
+Synapse Semiconductor,Synapse Semiconductor,exact,100.0
+Understudy Labs,Understudy,new,0.0
+Understudy Labs,Understudy,exact,100.0
+Rote,Rote,new,0.0
+Rote,Rote,exact,100.0
+Prized,Prized,new,0.0
+Prized,Prized,exact,100.0
+Studio,Studio,new,0.0
+Studio,Studio,exact,100.0
+Bernard,Bernard,new,0.0
+Bernard,Bernard,exact,100.0
+Maingen,Maingen,new,0.0
+Maingen,Maingen,exact,100.0
+Enact,Enact,new,0.0
+Enact,Enact,exact,100.0
+Rex,Rex,new,0.0
+Rex,Rex,exact,100.0
+Zomma,Zomma,new,0.0
+Zomma,Zomma,exact,100.0
+Nebula Security,Nebula Security,new,0.0
+Nebula Security,Nebula Security,exact,100.0
+Kara,Kara,new,0.0
+Kara,Kara,exact,100.0
+Palisade,Palisade,exact,100.0
+Palisade,Palisade,exact,100.0
+Trope,Trope,new,0.0
+Trope,Trope,exact,100.0
+Parasma,Parasma,new,0.0
+Parasma,Parasma,exact,100.0
+Belvedir,Belvedir,new,0.0
+Belvedir,Belvedir,exact,100.0
+Shielded,Shielded,new,0.0
+Shielded,Shielded,exact,100.0
+Olam Labs,Olam,new,0.0
+Olam Labs,Olam,exact,100.0
+Egoist Machines,Egoist Machines,new,0.0
+Egoist Machines,Egoist Machines,exact,100.0
+Mass Magnetics,Mass Magnetics,new,0.0
+Mass Magnetics,Mass Magnetics,exact,100.0
+Perceptron ML,Perceptron Ml,new,0.0
+Perceptron ML,Perceptron Ml,exact,100.0
+Erinys,Erinys,new,0.0
+Erinys,Erinys,exact,100.0
+HERA,Hera,new,0.0
+HERA,Hera,exact,100.0
+Donkey,Donkey,new,0.0
+Donkey,Donkey,exact,100.0
+OpenTrade,Opentrade,new,0.0
+OpenTrade,Opentrade,exact,100.0
+Hoplite,Hoplite,new,0.0
+Hoplite,Hoplite,exact,100.0
+CleverDeck,Cleverdeck,new,0.0
+CleverDeck,Cleverdeck,exact,100.0
+Pango,Pango,new,0.0
+Pango,Pango,exact,100.0
+tash,Tash,new,0.0
+tash,Tash,exact,100.0
+Torus,Torus,new,0.0
+Torus,Torus,exact,100.0
+Kebra,Kebra,new,0.0
+Kebra,Kebra,exact,100.0
+GitCafe,Gitcafe,new,0.0
+GitCafe,Gitcafe,exact,100.0
+RightNow,Rightnow,new,0.0
+RightNow,Rightnow,exact,100.0
+Edgerun,Edgerun,new,0.0
+Edgerun,Edgerun,exact,100.0
+Akkari,Akkari,new,0.0
+Akkari,Akkari,exact,100.0
+HeyClicky,Heyclicky,new,0.0
+HeyClicky,Heyclicky,exact,100.0
+Rindler,Rindler,new,0.0
+Rindler,Rindler,exact,100.0
+Proprio Robotics,Proprio Robotics,new,0.0
+Proprio Robotics,Proprio Robotics,exact,100.0
+Huscarl,Huscarl,new,0.0
+Huscarl,Huscarl,exact,100.0
+Thomas,Thomas,new,0.0
+Thomas,Thomas,exact,100.0
+Cohesion,Cohesion,new,0.0
+Cohesion,Cohesion,exact,100.0
+Maquoketa Research,Maquoketa Research,new,0.0
+Maquoketa Research,Maquoketa Research,exact,100.0
+Intelligence Factory,Intelligence Factory,new,0.0
+Intelligence Factory,Intelligence Factory,exact,100.0
+Amorphic Labs,Amorphic,new,0.0
+Amorphic Labs,Amorphic,exact,100.0
+rekursiv.ai,Rekursiv,new,0.0
+rekursiv.ai,Rekursiv,exact,100.0
+Clawvisor,Clawvisor,new,0.0
+Clawvisor,Clawvisor,exact,100.0
+Framewise Health,Framewise Health,new,0.0
+Framewise Health,Framewise Health,exact,100.0
+Arctic Health,Arctic Health,new,0.0
+Arctic Health,Arctic Health,exact,100.0
+Playabl.ai,Playabl,new,0.0
+Playabl.ai,Playabl,exact,100.0
+Enjamb Labs,Enjamb,new,0.0
+Enjamb Labs,Enjamb,exact,100.0
+Hyper,Hyper,new,0.0
+Hyper,Hyper,exact,100.0
+InsForge,Insforge,new,0.0
+InsForge,Insforge,exact,100.0
+ReasonBlocks,Reasonblocks,new,0.0
+ReasonBlocks,Reasonblocks,exact,100.0
+Modern,Modern Fertility,fuzzy,100.0
+Modern,Modern Fertility,fuzzy,100.0
+Panacea,Panacea,new,0.0
+Panacea,Panacea,exact,100.0
+CentralComs,Centralcoms,new,0.0
+CentralComs,Centralcoms,exact,100.0
+KugelAudio,Kugelaudio,new,0.0
+KugelAudio,Kugelaudio,exact,100.0
+Klaimee,Klaimee,new,0.0
+Klaimee,Klaimee,exact,100.0
+flowscope,Flowscope,new,0.0
+flowscope,Flowscope,exact,100.0
+Trident,Trident,new,0.0
+Trident,Trident,exact,100.0
+Gigacatalyst,Gigacatalyst,new,0.0
+Gigacatalyst,Gigacatalyst,exact,100.0
+Arlo Industries,Arlo Industries,new,0.0
+Arlo Industries,Arlo Industries,exact,100.0
+Astraea,Astraea,new,0.0
+Astraea,Astraea,exact,100.0
+Lattice Health,Lattice,fuzzy,100.0
+Lattice Health,Lattice,fuzzy,100.0
+Atlas Discovery,Atlas Discovery,new,0.0
+Atlas Discovery,Atlas Discovery,exact,100.0
+Manicule,Manicule,new,0.0
+Manicule,Manicule,exact,100.0
+Avea Robotics,Avea Robotics,new,0.0
+Avea Robotics,Avea Robotics,exact,100.0
+Mochatrade,Mochatrade,new,0.0
+Mochatrade,Mochatrade,exact,100.0
+Asendia AI,Asendia,new,0.0
+Asendia AI,Asendia,exact,100.0
+Revnu,Revnu,new,0.0
+Revnu,Revnu,exact,100.0
+Uno Wallet,Uno Wallet,new,0.0
+Uno Wallet,Uno Wallet,exact,100.0
+Arden,Arden,new,0.0
+Arden,Arden,exact,100.0
+AgentPhone,Agentphone,new,0.0
+AgentPhone,Agentphone,exact,100.0
+Gravy,Gravy,new,0.0
+Gravy,Gravy,exact,100.0
+Kinect,Kinect,new,0.0
+Kinect,Kinect,exact,100.0
+Runtime,Runtime,new,0.0
+Runtime,Runtime,exact,100.0
+YouArt,Youart,new,0.0
+YouArt,Youart,exact,100.0
+Expanse,Expanse,new,0.0
+Expanse,Expanse,exact,100.0
+CharacterQuilt,Characterquilt,new,0.0
+CharacterQuilt,Characterquilt,exact,100.0
+Pentagon,Pentagon,new,0.0
+Pentagon,Pentagon,exact,100.0
+Arzana,Arzana,new,0.0
+Arzana,Arzana,exact,100.0
+Auxos,Auxos,new,0.0
+Auxos,Auxos,exact,100.0
+ProjectX,Projectx,new,0.0
+ProjectX,Projectx,exact,100.0
+Tolmo,Tolmo,new,0.0
+Tolmo,Tolmo,exact,100.0
+OpenWork,Openwork,new,0.0
+OpenWork,Openwork,exact,100.0
+"Apollo Atomics, Inc.",Apollo,fuzzy,100.0
+"Apollo Atomics, Inc.",Apollo,fuzzy,100.0
+General Aviation,General Aviation,new,0.0
+General Aviation,General Aviation,exact,100.0
+OpenProse,Openprose,new,0.0
+OpenProse,Openprose,exact,100.0
+Aster,Aster,new,0.0
+Aster,Aster,exact,100.0
+Amboras,Amboras,new,0.0
+Amboras,Amboras,exact,100.0
+Hessian,Hessian,new,0.0
+Hessian,Hessian,exact,100.0
+Mentlio,Mentlio,new,0.0
+Mentlio,Mentlio,exact,100.0
+RASPIRE,Raspire,new,0.0
+RASPIRE,Raspire,exact,100.0
+Plena Health,Plena Health,new,0.0
+Plena Health,Plena Health,exact,100.0
+TesterArmy,Testerarmy,new,0.0
+TesterArmy,Testerarmy,exact,100.0
+Eden Robotics,Eden Robotics,new,0.0
+Eden Robotics,Eden Robotics,exact,100.0
+Foaster,Foaster,new,0.0
+Foaster,Foaster,exact,100.0
+AquaShield,Aquashield,new,0.0
+AquaShield,Aquashield,exact,100.0
+Ornadyne,Ornadyne,new,0.0
+Ornadyne,Ornadyne,exact,100.0
+ANORIA,Anoria,new,0.0
+ANORIA,Anoria,exact,100.0
+AbInitio Bio,Abinitio Bio,new,0.0
+AbInitio Bio,Abinitio Bio,exact,100.0
+Memory Store,Memory Store,new,0.0
+Memory Store,Memory Store,exact,100.0
+Saudara AI,Saudara,new,0.0
+Saudara AI,Saudara,exact,100.0
+Pops,Pops,new,0.0
+Pops,Pops,exact,100.0
+Silmaril,Silmaril,new,0.0
+Silmaril,Silmaril,exact,100.0
+BioStack Platforms,Biostack Platforms,new,0.0
+BioStack Platforms,Biostack Platforms,exact,100.0
+Ardent,Arden,fuzzy,90.9090909090909
+Ardent,Arden,fuzzy,90.9090909090909
+Kuli,Kuli,new,0.0
+Kuli,Kuli,exact,100.0
+Wato,Wato,new,0.0
+Wato,Wato,exact,100.0
+Tasklet,Tasklet,new,0.0
+Tasklet,Tasklet,exact,100.0
+Chronicle Labs,Chronicle,new,0.0
+Chronicle Labs,Chronicle,exact,100.0
+Walter,Walter,new,0.0
+Walter,Walter,exact,100.0
+Aseon Labs,Aseon,new,0.0
+Aseon Labs,Aseon,exact,100.0
+Soria,Soria,new,0.0
+Soria,Soria,exact,100.0
+Armature,Armature,new,0.0
+Armature,Armature,exact,100.0
+Collar,Collar,new,0.0
+Collar,Collar,exact,100.0
+PLAN0 AI,Plan0,new,0.0
+PLAN0 AI,Plan0,exact,100.0
+Zibra Labs,Zibra,new,0.0
+Zibra Labs,Zibra,exact,100.0
+Ara,Ara,new,0.0
+Ara,Ara,exact,100.0
+ValCtrl,Valctrl,new,0.0
+ValCtrl,Valctrl,exact,100.0
+General Instinct,General Instinct,new,0.0
+General Instinct,General Instinct,exact,100.0
+tday.com,Tday Com,new,0.0
+tday.com,Tday Com,exact,100.0
+ED1TH,Ed1Th,new,0.0
+ED1TH,Ed1Th,exact,100.0
+Minicor,Minicor,new,0.0
+Minicor,Minicor,exact,100.0
+Degla Inc,Degla,new,0.0
+Degla Inc,Degla,exact,100.0
+Archer,Archer,new,0.0
+Archer,Archer,exact,100.0
+River Markets,River Markets,new,0.0
+River Markets,River Markets,exact,100.0
+smol machines,Smol Machines,new,0.0
+smol machines,Smol Machines,exact,100.0
+Allowance,Allowance,new,0.0
+Allowance,Allowance,exact,100.0
+Harbor,Harbor,new,0.0
+Harbor,Harbor,exact,100.0
+Alchemize,Alchemize,new,0.0
+Alchemize,Alchemize,exact,100.0
+Complir,Complir,new,0.0
+Complir,Complir,exact,100.0
+AICE,Aice,new,0.0
+AICE,Aice,exact,100.0
+Infera,Infera,new,0.0
+Infera,Infera,exact,100.0
+Mount,Mount,new,0.0
+Mount,Mount,exact,100.0
+Parrot,Parrot,new,0.0
+Parrot,Parrot,exact,100.0
+Result,Result,new,0.0
+Result,Result,exact,100.0
+Sidekick,Sidekick,new,0.0
+Sidekick,Sidekick,exact,100.0
+Prototyping.io,Prototyping Io,new,0.0
+Prototyping.io,Prototyping Io,exact,100.0
+Lumius,Lumius,new,0.0
+Lumius,Lumius,exact,100.0
+Adialante,Adialante,new,0.0
+Adialante,Adialante,exact,100.0
+Savant,Savant,new,0.0
+Savant,Savant,exact,100.0
+Keyframe Labs,Keyframe,new,0.0
+Keyframe Labs,Keyframe,exact,100.0
+Voquill,Voquill,new,0.0
+Voquill,Voquill,exact,100.0
+Oddpool,Oddpool,new,0.0
+Oddpool,Oddpool,exact,100.0
+Ontora,Ontora,new,0.0
+Ontora,Ontora,exact,100.0
+Napkin Math,Napkin Math,new,0.0
+Napkin Math,Napkin Math,exact,100.0
+Gojiberry AI,Gojiberry,new,0.0
+Gojiberry AI,Gojiberry,exact,100.0
+WonderTx,Wondertx,new,0.0
+WonderTx,Wondertx,exact,100.0
+Lab0,Lab0,new,0.0
+Lab0,Lab0,exact,100.0
+BentoLabs AI,Bentolabs,new,0.0
+BentoLabs AI,Bentolabs,exact,100.0
+Lamina Labs,Lamina,new,0.0
+Lamina Labs,Lamina,exact,100.0
+Kimpton AI,Kimpton,new,0.0
+Kimpton AI,Kimpton,exact,100.0
+StableBrowse,Stablebrowse,new,0.0
+StableBrowse,Stablebrowse,exact,100.0
+Taiga,Taiga,new,0.0
+Taiga,Taiga,exact,100.0
+Pairio,Pairio,new,0.0
+Pairio,Pairio,exact,100.0
+Callab AI,Callab,new,0.0
+Callab AI,Callab,exact,100.0
+Synphony,Synphony,new,0.0
+Synphony,Synphony,exact,100.0
+Dreach,Reach,fuzzy,90.9090909090909
+Dreach,Reach,fuzzy,90.9090909090909
+Arga Labs,Arga,new,0.0
+Arga Labs,Arga,exact,100.0
+Andco,Andco,new,0.0
+Andco,Andco,exact,100.0
+RentAHuman,Rentahuman,new,0.0
+RentAHuman,Rentahuman,exact,100.0
+InstaAgent,Instaagent,new,0.0
+InstaAgent,Instaagent,exact,100.0
+Salesgraph,Salesgraph,new,0.0
+Salesgraph,Salesgraph,exact,100.0
+Sherpa,Sherpa,new,0.0
+Sherpa,Sherpa,exact,100.0
+Userlens,Userlens,new,0.0
+Userlens,Userlens,exact,100.0
+transload,Transload,new,0.0
+transload,Transload,exact,100.0
+Standout,Standout,new,0.0
+Standout,Standout,exact,100.0
+shotwell.ai,Shotwell,new,0.0
+shotwell.ai,Shotwell,exact,100.0
+Madrone,Madrone,new,0.0
+Madrone,Madrone,exact,100.0
+Pavoot,Pavoot,new,0.0
+Pavoot,Pavoot,exact,100.0
+qomplement,Qomplement,new,0.0
+qomplement,Qomplement,exact,100.0
+Deep Interactions,Deep Interactions,new,0.0
+Deep Interactions,Deep Interactions,exact,100.0
+KelAI,Kelai,new,0.0
+KelAI,Kelai,exact,100.0
+"HEVN, inc",Hevn,new,0.0
+"HEVN, inc",Hevn,exact,100.0
+Wealor,Wealor,new,0.0
+Wealor,Wealor,exact,100.0
+Elyra,Elyra,new,0.0
+Elyra,Elyra,exact,100.0
+Interfaze,Interfaze,new,0.0
+Interfaze,Interfaze,exact,100.0
+Zolvo,Zolvo,new,0.0
+Zolvo,Zolvo,exact,100.0
+Juno,Juno,new,0.0
+Juno,Juno,exact,100.0
+Kinro,Kinro,new,0.0
+Kinro,Kinro,exact,100.0
+GovGuard,Govguard,new,0.0
+GovGuard,Govguard,exact,100.0
+Superlog,Superlog,new,0.0
+Superlog,Superlog,exact,100.0
+GodHands,Godhands,new,0.0
+GodHands,Godhands,exact,100.0
+Limrun,Limrun,new,0.0
+Limrun,Limrun,exact,100.0
+Light Anchor,Light Anchor,new,0.0
+Light Anchor,Light Anchor,exact,100.0
+Hub,Hub,new,0.0
+Hub,Hub,exact,100.0
+Tenet Industries,Tenet Industries,new,0.0
+Tenet Industries,Tenet Industries,exact,100.0
+Atrisa,Atrisa,new,0.0
+Atrisa,Atrisa,exact,100.0
+Trellis,Trellis,new,0.0
+Trellis,Trellis,exact,100.0
+The Company Company,The Athletic,fuzzy,100.0
+The Company Company,The Athletic,fuzzy,100.0
+Dayjob,Dayjob,new,0.0
+Dayjob,Dayjob,exact,100.0
+InLoop Robotics,Inloop Robotics,new,0.0
+InLoop Robotics,Inloop Robotics,exact,100.0
+Zenbu,Zenbu,new,0.0
+Zenbu,Zenbu,exact,100.0
+Nine Fives,Nine Fives,new,0.0
+Nine Fives,Nine Fives,exact,100.0
+Incandor,Incandor,new,0.0
+Incandor,Incandor,exact,100.0
+Chert,Chert,new,0.0
+Chert,Chert,exact,100.0
+Saffron,Saffron,new,0.0
+Saffron,Saffron,exact,100.0
+Discovered Materials,Discovered Materials,new,0.0
+Discovered Materials,Discovered Materials,exact,100.0
+Lightsprint,Lightsprint,new,0.0
+Lightsprint,Lightsprint,exact,100.0
+Twolabs,Twolabs,new,0.0
+Twolabs,Twolabs,exact,100.0
+Marker,Marker,new,0.0
+Marker,Marker,exact,100.0
+Scope,Scope,new,0.0
+Scope,Scope,exact,100.0
+Hexa,Hexa,new,0.0
+Hexa,Hexa,exact,100.0
+Palette,Palette,new,0.0
+Palette,Palette,exact,100.0
+Rudus,Rudus,new,0.0
+Rudus,Rudus,exact,100.0
+Replicas,Replicas,new,0.0
+Replicas,Replicas,exact,100.0
+Totalis,Totalis,new,0.0
+Totalis,Totalis,exact,100.0
+Multiplier,Multiplier,new,0.0
+Multiplier,Multiplier,exact,100.0
+Osmaura,Osmaura,new,0.0
+Osmaura,Osmaura,exact,100.0
+Most Robotic,Most Robotic,new,0.0
+Most Robotic,Most Robotic,exact,100.0
+Illume Labs,Illume,new,0.0
+Illume Labs,Illume,exact,100.0
+Memoir,Memoir,new,0.0
+Memoir,Memoir,exact,100.0
+"PerfectBit, Inc.",Perfectbit,new,0.0
+"PerfectBit, Inc.",Perfectbit,exact,100.0
+Stage,Stage,new,0.0
+Stage,Stage,exact,100.0
+Standard Signal,Standard Signal,new,0.0
+Standard Signal,Standard Signal,exact,100.0
+primitive,Primitive,new,0.0
+primitive,Primitive,exact,100.0
+Korso,Korso,new,0.0
+Korso,Korso,exact,100.0
+Klarify,Klarify,new,0.0
+Klarify,Klarify,exact,100.0
+Surtr Defense Systems,Surtr Defense,new,0.0
+Surtr Defense Systems,Surtr Defense,exact,100.0
+Hedge,Hedge,new,0.0
+Hedge,Hedge,exact,100.0
+Cardinal,Cardinal,new,0.0
+Cardinal,Cardinal,exact,100.0
+Wideframe,Wideframe,new,0.0
+Wideframe,Wideframe,exact,100.0
+Martini,Martini,new,0.0
+Martini,Martini,exact,100.0
+Litmus,Litmus,new,0.0
+Litmus,Litmus,exact,100.0
+Condor Energy,Condor Energy,new,0.0
+Condor Energy,Condor Energy,exact,100.0
+Remix,Remix,new,0.0
+Remix,Remix,exact,100.0
+OpenVector,Openvector,new,0.0
+OpenVector,Openvector,exact,100.0
+Shofo,Shofo,new,0.0
+Shofo,Shofo,exact,100.0
+Wayco,Wayco,new,0.0
+Wayco,Wayco,exact,100.0
+"Applied Electrodynamics, Inc.",Applied Electrodynamics,new,0.0
+"Applied Electrodynamics, Inc.",Applied Electrodynamics,exact,100.0
+Unifold,Unifold,new,0.0
+Unifold,Unifold,exact,100.0
+Carrot Labs,Carrot,new,0.0
+Carrot Labs,Carrot,exact,100.0
+Dispatch,Dispatch,new,0.0
+Dispatch,Dispatch,exact,100.0
+Bloom,Bloomy,fuzzy,90.9090909090909
+Bloom,Bloomy,fuzzy,90.9090909090909
+Aurorin CAD,Aurorin Cad,new,0.0
+Aurorin CAD,Aurorin Cad,exact,100.0
+Fixture,Fixture,new,0.0
+Fixture,Fixture,exact,100.0
+DAIVIN!,Daivin,new,0.0
+DAIVIN!,Daivin,exact,100.0
+Brumby (Formerly GrazeMate),Brumby Formerly Grazemate,new,0.0
+Brumby (Formerly GrazeMate),Brumby Formerly Grazemate,exact,100.0
+Origami Robotics,Origami Robotics,new,0.0
+Origami Robotics,Origami Robotics,exact,100.0
+Ossus,Osseus,fuzzy,90.9090909090909
+Ossus,Osseus,fuzzy,90.9090909090909
+Rubric AI,Rubric,new,0.0
+Rubric AI,Rubric,exact,100.0
+Regbase,Regbase,new,0.0
+Regbase,Regbase,exact,100.0
+Zymbly,Zymbly,new,0.0
+Zymbly,Zymbly,exact,100.0
+Dipole Labs,Dipole,new,0.0
+Dipole Labs,Dipole,exact,100.0
+Ritivel,Ritivel,new,0.0
+Ritivel,Ritivel,exact,100.0
+Polymorph,Polymorph,new,0.0
+Polymorph,Polymorph,exact,100.0
+Khotan (formerly Pollinate),Khotan Formerly Pollinate,new,0.0
+Khotan (formerly Pollinate),Khotan Formerly Pollinate,exact,100.0
+SpotPay,Spotpay,new,0.0
+SpotPay,Spotpay,exact,100.0
+Poth Labs,Poth,new,0.0
+Poth Labs,Poth,exact,100.0
+VOYGR,Voygr,new,0.0
+VOYGR,Voygr,exact,100.0
+MochaCare,Mochacare,new,0.0
+MochaCare,Mochacare,exact,100.0
+Cova,Cova,new,0.0
+Cova,Cova,exact,100.0
+Vela,Vela,new,0.0
+Vela,Vela,exact,100.0
+Supafax,Supafax,new,0.0
+Supafax,Supafax,exact,100.0
+Talking Computers,Talking Computers,new,0.0
+Talking Computers,Talking Computers,exact,100.0
+Control Seat,Control Seat,new,0.0
+Control Seat,Control Seat,exact,100.0
+Copperlane,Copperlane,new,0.0
+Copperlane,Copperlane,exact,100.0
+Tsenta,Tsenta,new,0.0
+Tsenta,Tsenta,exact,100.0
+Dream,Dream,new,0.0
+Dream,Dream,exact,100.0
+Atlia,Atlia,new,0.0
+Atlia,Atlia,exact,100.0
+Canary,Canary,new,0.0
+Canary,Canary,exact,100.0
+Grade,Grade,new,0.0
+Grade,Grade,exact,100.0
+Sila,Sila,new,0.0
+Sila,Sila,exact,100.0
+Maven,Maven,new,0.0
+Maven,Maven,exact,100.0
+Moda,Moda,new,0.0
+Moda,Moda,exact,100.0
+The Token Company,The Token,new,0.0
+The Token Company,The Token,exact,100.0
+Meteoric,Meteoric,new,0.0
+Meteoric,Meteoric,exact,100.0
+BeeSafe AI,Beesafe,new,0.0
+BeeSafe AI,Beesafe,exact,100.0
+Fed10,Fed10,new,0.0
+Fed10,Fed10,exact,100.0
+Inth,Inth,new,0.0
+Inth,Inth,exact,100.0
+Squid,Squid,new,0.0
+Squid,Squid,exact,100.0
+Turnstone,Turnstone,new,0.0
+Turnstone,Turnstone,exact,100.0
+Foreman,Foreman,new,0.0
+Foreman,Foreman,exact,100.0
+Booko,Booko,new,0.0
+Booko,Booko,exact,100.0
+Corelayer,Corelayer,new,0.0
+Corelayer,Corelayer,exact,100.0
+General Legal,General Legal,new,0.0
+General Legal,General Legal,exact,100.0
+Fort,Fort,new,0.0
+Fort,Fort,exact,100.0
+Balance,Balance,new,0.0
+Balance,Balance,exact,100.0
+Ekpa,Ekpa,new,0.0
+Ekpa,Ekpa,exact,100.0
+Chasi,Chasi,new,0.0
+Chasi,Chasi,exact,100.0
+Remy AI,Remy,new,0.0
+Remy AI,Remy,exact,100.0
+Anchorhead,Anchorhead,new,0.0
+Anchorhead,Anchorhead,exact,100.0
+o11,O11,new,0.0
+o11,O11,exact,100.0
+Doomersion,Doomersion,new,0.0
+Doomersion,Doomersion,exact,100.0
+Sequence Markets,Sequence Markets,new,0.0
+Sequence Markets,Sequence Markets,exact,100.0
+Libra Robotics,Libra Robotics,new,0.0
+Libra Robotics,Libra Robotics,exact,100.0
+Ditto Biosciences,Ditto Biosciences,new,0.0
+Ditto Biosciences,Ditto Biosciences,exact,100.0
+Servo7,Servo7,new,0.0
+Servo7,Servo7,exact,100.0
+Datoric,Datoric,new,0.0
+Datoric,Datoric,exact,100.0
+Superset,Superset,new,0.0
+Superset,Superset,exact,100.0
+Netter,Netter,new,0.0
+Netter,Netter,exact,100.0
+Voxel Energy,Voxel Energy,new,0.0
+Voxel Energy,Voxel Energy,exact,100.0
+Polymath,Polymath,new,0.0
+Polymath,Polymath,exact,100.0
+Archal,Archal,new,0.0
+Archal,Archal,exact,100.0
+Bubble Lab,Bubble Lab,new,0.0
+Bubble Lab,Bubble Lab,exact,100.0
+Pocket,Pocket,new,0.0
+Pocket,Pocket,exact,100.0
+Byteport,Byteport,new,0.0
+Byteport,Byteport,exact,100.0
+Constellation Space,Constellation Space,new,0.0
+Constellation Space,Constellation Space,exact,100.0
+Sazabi,Sazabi,new,0.0
+Sazabi,Sazabi,exact,100.0
+AxionOrbital Space,Axionorbital Space,new,0.0
+AxionOrbital Space,Axionorbital Space,exact,100.0
+Oximy,Oximy,new,0.0
+Oximy,Oximy,exact,100.0
+Caretta,Caretta,new,0.0
+Caretta,Caretta,exact,100.0
+Samora AI,Samora,new,0.0
+Samora AI,Samora,exact,100.0
+Human Archive,Human Archive,new,0.0
+Human Archive,Human Archive,exact,100.0
+Forum,Forum,new,0.0
+Forum,Forum,exact,100.0
+Sitefire,Sitefire,new,0.0
+Sitefire,Sitefire,exact,100.0
+Robby,Robby,new,0.0
+Robby,Robby,exact,100.0
+Ressl AI,Ressl,new,0.0
+Ressl AI,Ressl,exact,100.0
+Emdash,Emdash,new,0.0
+Emdash,Emdash,exact,100.0
+InventoryQuant,Inventoryquant,new,0.0
+InventoryQuant,Inventoryquant,exact,100.0
+Congruent,Congruent,new,0.0
+Congruent,Congruent,exact,100.0
+Reframe,Reframe,new,0.0
+Reframe,Reframe,exact,100.0
+Valence,Valence,new,0.0
+Valence,Valence,exact,100.0
+9 Mothers,9 Mothers,new,0.0
+9 Mothers,9 Mothers,exact,100.0
+Approxima,Approxima,new,0.0
+Approxima,Approxima,exact,100.0
+Traverse,Traverse,new,0.0
+Traverse,Traverse,exact,100.0
+Revion,Revion,new,0.0
+Revion,Revion,exact,100.0
+Maywood,Maywood,new,0.0
+Maywood,Maywood,exact,100.0
+Fenrock AI,Fenrock,new,0.0
+Fenrock AI,Fenrock,exact,100.0
+End Close,End Close,new,0.0
+End Close,End Close,exact,100.0
+Chamber,Chamber,new,0.0
+Chamber,Chamber,exact,100.0
+Assemble,Assemble,new,0.0
+Assemble,Assemble,exact,100.0
+Patientdesk.ai,Patientdesk,new,0.0
+Patientdesk.ai,Patientdesk,exact,100.0
+Visibl Semiconductors,Visibl Semiconductors,new,0.0
+Visibl Semiconductors,Visibl Semiconductors,exact,100.0
+Synthetic Sciences,Synthetic Sciences,new,0.0
+Synthetic Sciences,Synthetic Sciences,exact,100.0
+Seeing Systems,Seeing,new,0.0
+Seeing Systems,Seeing,exact,100.0
+Jinba,Jinba,new,0.0
+Jinba,Jinba,exact,100.0
+Cardboard,Cardboard,new,0.0
+Cardboard,Cardboard,exact,100.0
+Prana,Prana,new,0.0
+Prana,Prana,exact,100.0
+Rhizome AI,Rhizome,new,0.0
+Rhizome AI,Rhizome,exact,100.0
+Pax Historia,Pax Historia,new,0.0
+Pax Historia,Pax Historia,exact,100.0
+Parameter,Parameter,new,0.0
+Parameter,Parameter,exact,100.0
+Laurence,Laurence,new,0.0
+Laurence,Laurence,exact,100.0
+Terminal Use,Terminal Use,new,0.0
+Terminal Use,Terminal Use,exact,100.0
+Overshoot,Overshoot,new,0.0
+Overshoot,Overshoot,exact,100.0
+Cajal,Cajal,new,0.0
+Cajal,Cajal,exact,100.0
+Proximitty,Proximitty,new,0.0
+Proximitty,Proximitty,exact,100.0
+Instinct,General Instinct,fuzzy,100.0
+Instinct,General Instinct,fuzzy,100.0
+Stilta,Stilta,new,0.0
+Stilta,Stilta,exact,100.0
+Unisson,Unisson,new,0.0
+Unisson,Unisson,exact,100.0
+IncidentFox,Incidentfox,new,0.0
+IncidentFox,Incidentfox,exact,100.0
+Compresr,Compresr,new,0.0
+Compresr,Compresr,exact,100.0
+Opalite Health,Opalite Health,new,0.0
+Opalite Health,Opalite Health,exact,100.0
+Confluence Labs,Confluence,new,0.0
+Confluence Labs,Confluence,exact,100.0
+Rapidfolio,Rapidfolio,new,0.0
+Rapidfolio,Rapidfolio,exact,100.0
+Mango Medical,Mango Medical,new,0.0
+Mango Medical,Mango Medical,exact,100.0
+Sponge,Sponge,new,0.0
+Sponge,Sponge,exact,100.0
+Terranox AI,Terranox,new,0.0
+Terranox AI,Terranox,exact,100.0
+Drafted,Drafted,new,0.0
+Drafted,Drafted,exact,100.0
+Ventura,Ventura,new,0.0
+Ventura,Ventura,exact,100.0
+Orthogonal,Orthogonal,new,0.0
+Orthogonal,Orthogonal,exact,100.0
+Perfectly,Perfectly,new,0.0
+Perfectly,Perfectly,exact,100.0
+Fern,Fern,new,0.0
+Fern,Fern,exact,100.0
+Sparkles,Sparkles,new,0.0
+Sparkles,Sparkles,exact,100.0
+EigenPal,Eigenpal,new,0.0
+EigenPal,Eigenpal,exact,100.0
+Salus,Salus,new,0.0
+Salus,Salus,exact,100.0
+Moritz,Moritz,new,0.0
+Moritz,Moritz,exact,100.0
+RamAIn,Ramain,new,0.0
+RamAIn,Ramain,exact,100.0
+Milliray,Milliray,new,0.0
+Milliray,Milliray,exact,100.0
+Beyond Reach Labs,Reach,fuzzy,100.0
+Beyond Reach Labs,Reach,fuzzy,100.0
+OctaPulse,Octapulse,new,0.0
+OctaPulse,Octapulse,exact,100.0
+CodeWisp,Codewisp,new,0.0
+CodeWisp,Codewisp,exact,100.0
+Ashr,Ashr,new,0.0
+Ashr,Ashr,exact,100.0
+Aemon,Aemon,new,0.0
+Aemon,Aemon,exact,100.0
+Luel,Luel,new,0.0
+Luel,Luel,exact,100.0
+Scheduling Wizard,Scheduling Wizard,new,0.0
+Scheduling Wizard,Scheduling Wizard,exact,100.0
+RoboDock,Robodock,new,0.0
+RoboDock,Robodock,exact,100.0
+Skillsync,Skillsync,new,0.0
+Skillsync,Skillsync,exact,100.0
+MouseCat,Mousecat,new,0.0
+MouseCat,Mousecat,exact,100.0
+Zatanna,Zatanna,new,0.0
+Zatanna,Zatanna,exact,100.0
+AutoSitu,Autositu,new,0.0
+AutoSitu,Autositu,exact,100.0
+Verdex,Verdex,new,0.0
+Verdex,Verdex,exact,100.0
+Cumulus Labs,Cumulus,new,0.0
+Cumulus Labs,Cumulus,exact,100.0
+Tepali,Tepali,new,0.0
+Tepali,Tepali,exact,100.0
+Palus Finance,Palus Finance,new,0.0
+Palus Finance,Palus Finance,exact,100.0
+21st,21St,new,0.0
+21st,21St,exact,100.0
+Avoice,Avoice,new,0.0
+Avoice,Avoice,exact,100.0
+ZeroSettle,Zerosettle,new,0.0
+ZeroSettle,Zerosettle,exact,100.0
+/dev/fast,Dev Fast,new,0.0
+/dev/fast,Dev Fast,exact,100.0
+Cignara,Cignara,new,0.0
+Cignara,Cignara,exact,100.0
+OpenSpec,Openspec,new,0.0
+OpenSpec,Openspec,exact,100.0
+Piris Labs,Piris,new,0.0
+Piris Labs,Piris,exact,100.0
+CellType,Celltype,new,0.0
+CellType,Celltype,exact,100.0
+Burt,Burt,new,0.0
+Burt,Burt,exact,100.0
+Envariant,Envariant,new,0.0
+Envariant,Envariant,exact,100.0
+Cascade,Cascade,new,0.0
+Cascade,Cascade,exact,100.0
+Beacon Health,Beacon Health,new,0.0
+Beacon Health,Beacon Health,exact,100.0
+Strand AI,Strand,new,0.0
+Strand AI,Strand,exact,100.0
+BaseFrame,Baseframe,new,0.0
+BaseFrame,Baseframe,exact,100.0
+Protent,Protent,new,0.0
+Protent,Protent,exact,100.0
+Cofia,Cofia,new,0.0
+Cofia,Cofia,exact,100.0
+Fuchsia,Fuchsia,new,0.0
+Fuchsia,Fuchsia,exact,100.0
+LegalOS,Legalos,new,0.0
+LegalOS,Legalos,exact,100.0
+Sentrial,Sentrial,new,0.0
+Sentrial,Sentrial,exact,100.0
+10x Science,10X Science,new,0.0
+10x Science,10X Science,exact,100.0
+REV1,Rev1,new,0.0
+REV1,Rev1,exact,100.0
+shortkit,Shortkit,new,0.0
+shortkit,Shortkit,exact,100.0
+Asimov,Asimov,new,0.0
+Asimov,Asimov,exact,100.0
+Lexius,Lexius,new,0.0
+Lexius,Lexius,exact,100.0
+Axis,Axis,new,0.0
+Axis,Axis,exact,100.0
+Mirabelle,Mirabelle,new,0.0
+Mirabelle,Mirabelle,exact,100.0
+Docura Health,Docura Health,new,0.0
+Docura Health,Docura Health,exact,100.0
+Lance,Lance,new,0.0
+Lance,Lance,exact,100.0
+RunAnywhere,Runanywhere,new,0.0
+RunAnywhere,Runanywhere,exact,100.0
+Lucent,Lucent,new,0.0
+Lucent,Lucent,exact,100.0
+"Prescience, Inc.",Prescience,new,0.0
+"Prescience, Inc.",Prescience,exact,100.0
+Ruma Care,Ruma Care,new,0.0
+Ruma Care,Ruma Care,exact,100.0
+Klaus AI,Klaus,new,0.0
+Klaus AI,Klaus,exact,100.0
+Kita,Kita,new,0.0
+Kita,Kita,exact,100.0
+Syntropy,Syntropy,new,0.0
+Syntropy,Syntropy,exact,100.0
+One Robot,One Robot,new,0.0
+One Robot,One Robot,exact,100.0
+Didit,Didit,new,0.0
+Didit,Didit,exact,100.0
+Panta,Panta,new,0.0
+Panta,Panta,exact,100.0
+Imperfect,Imperfect,new,0.0
+Imperfect,Imperfect,exact,100.0
+OneTriangle,Onetriangle,new,0.0
+OneTriangle,Onetriangle,exact,100.0
+Payna,Payna,new,0.0
+Payna,Payna,exact,100.0
+Origin,Origin,new,0.0
+Origin,Origin,exact,100.0
+Clara,Clara,new,0.0
+Clara,Clara,exact,100.0
+Hlabs,Hlabs,new,0.0
+Hlabs,Hlabs,exact,100.0
+Eos AI,Eos,new,0.0
+Eos AI,Eos,exact,100.0
+Valgo,Valgo,new,0.0
+Valgo,Valgo,exact,100.0
+ARC Prize Foundation,Arc Prize Foundation,new,0.0
+ARC Prize Foundation,Arc Prize Foundation,exact,100.0
+Corvera,Covera,fuzzy,92.3076923076923
+Corvera,Covera,fuzzy,92.3076923076923
+FullSeam,Fullseam,new,0.0
+FullSeam,Fullseam,exact,100.0
+Waddle Labs,Waddle,new,0.0
+Waddle Labs,Waddle,exact,100.0
+Linzumi,Linzumi,new,0.0
+Linzumi,Linzumi,exact,100.0
+Advanced Metal Research,Advanced Metal Research,new,0.0
+Advanced Metal Research,Advanced Metal Research,exact,100.0
+Ploy,Ploy,new,0.0
+Ploy,Ploy,exact,100.0
+CatchBack Cards,Catchback Cards,new,0.0
+CatchBack Cards,Catchback Cards,exact,100.0
+Mantis,Mantis,new,0.0
+Mantis,Mantis,exact,100.0
+Haladir,Haladir,new,0.0
+Haladir,Haladir,exact,100.0
+ClaimGlide,Claimglide,new,0.0
+ClaimGlide,Claimglide,exact,100.0
+Inviscid AI,Inviscid,new,0.0
+Inviscid AI,Inviscid,exact,100.0
+Coasts,Coasts,new,0.0
+Coasts,Coasts,exact,100.0
+Zephyr Fusion,Zephyr Fusion,new,0.0
+Zephyr Fusion,Zephyr Fusion,exact,100.0
+Mayflower,Mayflower,new,0.0
+Mayflower,Mayflower,exact,100.0
+Ndea,Ndea,new,0.0
+Ndea,Ndea,exact,100.0
+item,Item,new,0.0
+item,Item,exact,100.0
+Crosslayer Labs,Crosslayer,new,0.0
+Crosslayer Labs,Crosslayer,exact,100.0
+Rivet,Rivet,new,0.0
+Rivet,Rivet,exact,100.0
+Openroll,Openroll,new,0.0
+Openroll,Openroll,exact,100.0
+Amika,Amika,new,0.0
+Amika,Amika,exact,100.0
+Specific Labs,Specific,new,0.0
+Specific Labs,Specific,exact,100.0
+Moss,Moss,new,0.0
+Moss,Moss,exact,100.0
+Zarna,Zarna,new,0.0
+Zarna,Zarna,exact,100.0
+MarkIt,Markit,new,0.0
+MarkIt,Markit,exact,100.0
+Voltair,Voltair,new,0.0
+Voltair,Voltair,exact,100.0
+Clicks Health,Clicks Health,new,0.0
+Clicks Health,Clicks Health,exact,100.0
+Fastshot,Fastshot,new,0.0
+Fastshot,Fastshot,exact,100.0
+Vector Legal,Vector Legal,new,0.0
+Vector Legal,Vector Legal,exact,100.0
+Shoptiques,Shoptiques,new,0.0
+Shoptiques,Shoptiques,exact,100.0
+Antigen,Antigen,new,0.0
+Antigen,Antigen,exact,100.0
+LunaBill,Lunabill,new,0.0
+LunaBill,Lunabill,exact,100.0
+Axial,Axial,new,0.0
+Axial,Axial,exact,100.0
+Velvet,Velvet,new,0.0
+Velvet,Velvet,exact,100.0
+DiligenceSquared,Diligencesquared,new,0.0
+DiligenceSquared,Diligencesquared,exact,100.0
+Amera,Amera,new,0.0
+Amera,Amera,exact,100.0
+Forge Robotics,Forge Robotics,new,0.0
+Forge Robotics,Forge Robotics,exact,100.0
+Bluma,Bluma,new,0.0
+Bluma,Bluma,exact,100.0
+Lightberry,Lightberry,new,0.0
+Lightberry,Lightberry,exact,100.0
+The Hog,The Hog,new,0.0
+The Hog,The Hog,exact,100.0
+Layers,Layers,new,0.0
+Layers,Layers,exact,100.0
+Boom AI,Boom,new,0.0
+Boom AI,Boom,exact,100.0
+Freeport Markets,Freeport Markets,new,0.0
+Freeport Markets,Freeport Markets,exact,100.0
+Miniswap,Miniswap,new,0.0
+Miniswap,Miniswap,exact,100.0
+Rovi Health,Rovi Health,new,0.0
+Rovi Health,Rovi Health,exact,100.0
+MadeThis,Madethis,new,0.0
+MadeThis,Madethis,exact,100.0
+General Astronautics,General Astronautics,new,0.0
+General Astronautics,General Astronautics,exact,100.0
+Jarmin,Jarmin,new,0.0
+Jarmin,Jarmin,exact,100.0
+Exonic,Exonic,new,0.0
+Exonic,Exonic,exact,100.0
+Lemma,Lemma,new,0.0
+Lemma,Lemma,exact,100.0
+Perseus,Perseus,new,0.0
+Perseus,Perseus,exact,100.0
+Karumi,Karumi,new,0.0
+Karumi,Karumi,exact,100.0
+Icarus,Icarus,new,0.0
+Icarus,Icarus,exact,100.0
+Sava,Sava,new,0.0
+Sava,Sava,exact,100.0
+TakeCareOS,Takecareos,new,0.0
+TakeCareOS,Takecareos,exact,100.0
+Denki,Denki,new,0.0
+Denki,Denki,exact,100.0
+Metorial,Metorial,new,0.0
+Metorial,Metorial,exact,100.0
+Kalpa Labs,Kalpa,new,0.0
+Kalpa Labs,Kalpa,exact,100.0
+Absurd,Absurd,new,0.0
+Absurd,Absurd,exact,100.0
+Clad Labs,Clad,new,0.0
+Clad Labs,Clad,exact,100.0
+Automax.ai,Automax,new,0.0
+Automax.ai,Automax,exact,100.0
+Specific,Specific,exact,100.0
+Specific,Specific,exact,100.0
+Relaw,Relaw,new,0.0
+Relaw,Relaw,exact,100.0
+Narrative,Narrative,new,0.0
+Narrative,Narrative,exact,100.0
+Crunched,Crunched,new,0.0
+Crunched,Crunched,exact,100.0
+Lua Global Inc,Lua Global,new,0.0
+Lua Global Inc,Lua Global,exact,100.0
+Philon,Philon,new,0.0
+Philon,Philon,exact,100.0
+Sourcebot,Sourcebot,new,0.0
+Sourcebot,Sourcebot,exact,100.0
+Zalos,Zalos,new,0.0
+Zalos,Zalos,exact,100.0
+Prism,Prism,new,0.0
+Prism,Prism,exact,100.0
+Aside,Aside,new,0.0
+Aside,Aside,exact,100.0
+Scott AI,Scott,new,0.0
+Scott AI,Scott,exact,100.0
+Everest,Everest,new,0.0
+Everest,Everest,exact,100.0
+Expected Parrot,Parrot,fuzzy,100.0
+Expected Parrot,Parrot,fuzzy,100.0
+Imagine AI,Imagine,new,0.0
+Imagine AI,Imagine,exact,100.0
+Anto Biosciences,Anto Biosciences,new,0.0
+Anto Biosciences,Anto Biosciences,exact,100.0
+Patent Watch,Patent Watch,new,0.0
+Patent Watch,Patent Watch,exact,100.0
+s2.dev,S2 Dev,new,0.0
+s2.dev,S2 Dev,exact,100.0
+Tornyol,Tornyol,new,0.0
+Tornyol,Tornyol,exact,100.0
+Nucleo,Nucleo,new,0.0
+Nucleo,Nucleo,exact,100.0
+Leadbay,Leadbay,new,0.0
+Leadbay,Leadbay,exact,100.0
+Pixley AI,Pixley,new,0.0
+Pixley AI,Pixley,exact,100.0
+Cortex AI,Cortex,new,0.0
+Cortex AI,Cortex,exact,100.0
+Radius,Radius,new,0.0
+Radius,Radius,exact,100.0
+Thesis,Thesis,new,0.0
+Thesis,Thesis,exact,100.0
+Oxus,Oxus,new,0.0
+Oxus,Oxus,exact,100.0
+Play Health,Play Health,new,0.0
+Play Health,Play Health,exact,100.0
+Casey,Casey,new,0.0
+Casey,Casey,exact,100.0
+Selfin,Selfin,new,0.0
+Selfin,Selfin,exact,100.0
+Compyle,Compyle,new,0.0
+Compyle,Compyle,exact,100.0
+Lexi,Lexi,new,0.0
+Lexi,Lexi,exact,100.0
+Codyco,Codyco,new,0.0
+Codyco,Codyco,exact,100.0
+ComplyDo,Complydo,new,0.0
+ComplyDo,Complydo,exact,100.0
+Bravi,Bravi,new,0.0
+Bravi,Bravi,exact,100.0
+FinalDose,Finaldose,new,0.0
+FinalDose,Finaldose,exact,100.0
+Sunflower,Sunflower,new,0.0
+Sunflower,Sunflower,exact,100.0
+Captain,Captain,new,0.0
+Captain,Captain,exact,100.0
+Redapto,Redapto,new,0.0
+Redapto,Redapto,exact,100.0
+Helonic,Helonic,new,0.0
+Helonic,Helonic,exact,100.0
+Aleph Lab,Aleph Lab,new,0.0
+Aleph Lab,Aleph Lab,exact,100.0
+Logical,Logical,new,0.0
+Logical,Logical,exact,100.0
+buesken strategy & consulting,Buesken Strategy Consulting,new,0.0
+Datwyler IT Infra,Datwyler It Infra,new,0.0
+wabcon,Wabcon,new,0.0
+Lionflence,Lionflence,new,0.0
+Luma Life,Luma Life,new,0.0
+Finnofleet GmbH,Finnofleet,new,0.0
+hellofresh,Hellofresh,new,0.0
+hellofresh,Hellofresh,exact,100.0
+hellofresh,Hellofresh,exact,100.0
+hellofresh,Hellofresh,exact,100.0
+raisin,Raisin,new,0.0
+Trading212,Trading212,new,0.0
+Trading212,Trading212,exact,100.0
+Trading212,Trading212,exact,100.0
+Trading212,Trading212,exact,100.0
+Trading212,Trading212,exact,100.0
+Trading212,Trading212,exact,100.0
+Fischer & Partner Gesellschaft für Personal mbH,Fischer Partner Gesellschaft Fur Personal Mbh,new,0.0
+Zukunftsmotor Gmbh,Zukunftsmotor,new,0.0
+Zukunftsmotor Gmbh,Zukunftsmotor,exact,100.0
+Zukunftsmotor Gmbh,Zukunftsmotor,exact,100.0
+Doo,Doo,new,0.0
+Esanum,Esanum,new,0.0
+Kevin Kehr,Kevin Kehr,new,0.0
+VRT Partnerschaft mbB Wirtschaftsprüfer Steuerberater Rechtsanwälte,Vrt Partnerschaft Mbb Wirtschaftsprufer Steuerberater Rechtsanwalte,new,0.0
+Snke,Snke,new,0.0
+Snke,Snke,exact,100.0
+Snke,Snke,exact,100.0
+Real Digital,Real Digital,new,0.0
+Real Digital,Real Digital,exact,100.0
+Arculus,Arculus,new,0.0
+Sti,Sti,new,0.0
+Simcon,Simcon,new,0.0
+Oh So,Oh So,new,0.0
+PlaytestCloud GmbH,Playtestcloud,new,0.0
+KI group GmbH,Ki Group,new,0.0
+Peakpeak,Peakpeak,new,0.0
+Friendventure,Friendventure,new,0.0
+Friendventure,Friendventure,exact,100.0
+Global Side Gmbh,Global Side,new,0.0
+Stabl Energy Gmbh,Stabl Energy,new,0.0
+Stabl Energy Gmbh,Stabl Energy,exact,100.0
+Lissi GmbH,Lissi,new,0.0
+Traide Ai,Traide,new,0.0
+Traide Ai,Traide,exact,100.0
+Albert Schweitzer Stiftung,Albert Schweitzer Stiftung,new,0.0
+Revel8,Revel8,new,0.0
+Revel8,Revel8,exact,100.0
+Apoprojekt,Apoprojekt,new,0.0
+Apoprojekt,Apoprojekt,exact,100.0
+Apoprojekt,Apoprojekt,exact,100.0
+ASC Personalberatung & Direktvermittlung,Asc Personalberatung Direktvermittlung,new,0.0
+ITA Consulting GmbH,Ita Consulting,new,0.0
+Sidekick Network GmbH & Co. KG,Sidekick,fuzzy,100.0
+Santos Grills GmbH,Santos Grills,new,0.0
+IONOS SE,Ionos Se,new,0.0
+IONOS SE,Ionos Se,exact,100.0
+CES Consulting Engineers Salzgitter GmbH,Ces Consulting Engineers Salzgitter,new,0.0
+everii Group GmbH,Everii Group,new,0.0
+Livello GmbH,Livello,new,0.0
+Santos Grills GmbH,Santos Grills,exact,100.0
+AB-Jobs,Ab Jobs,new,0.0
+wppmedia,Wppmedia,new,0.0
+celonis,Celonis,new,0.0
+affinidi,Affinidi,new,0.0
+affinidi,Affinidi,exact,100.0
+affinidi,Affinidi,exact,100.0
+wolt,Wolt,new,0.0
+wolt,Wolt,exact,100.0
+ADITO Software GmbH,Adito Software,new,0.0
+XTP AG,Xtp Ag,new,0.0
+Realchemistry,Realchemistry,new,0.0
+Instil,Instil,new,0.0
+Instil,Instil,exact,100.0
+Unity Advisory,Unity Advisory,new,0.0
+Healf,Healf,new,0.0
+Motorway,Motorway,new,0.0
+Motorway,Motorway,exact,100.0
+Motorway,Motorway,exact,100.0
+Thought Machine,Thought Machine,new,0.0
+Fundingcircle,Fundingcircle,new,0.0
+Duck Duck Go,Duck Duck Go,new,0.0
+Orbitalindustries,Orbitalindustries,new,0.0
+Orbitalindustries,Orbitalindustries,exact,100.0
+Midnite,Midnite,new,0.0
+Ivcevidensia,Ivcevidensia,new,0.0
+Ivcevidensia,Ivcevidensia,exact,100.0
+Aircall,Aircall,new,0.0
+Aircall,Aircall,exact,100.0
+The Bike Club,The Bike Club,new,0.0
+sonymusicentertainment,Sonymusicentertainment,new,0.0
+sonymusicentertainment,Sonymusicentertainment,exact,100.0
+sonymusicentertainment,Sonymusicentertainment,exact,100.0
+sonymusicentertainment,Sonymusicentertainment,exact,100.0
+Hopper,Hopper,new,0.0
+Trading212,Trading212,exact,100.0
+Trading212,Trading212,exact,100.0
+Trading212,Trading212,exact,100.0
+Trading212,Trading212,exact,100.0
+DataForce by TransPerfect,Dataforce By Transperfect,new,0.0
+Woltglobal2,Woltglobal2,new,0.0
+tripadvisor,Tripadvisor,new,0.0
+Faculty,Faculty,new,0.0
+Faculty,Faculty,exact,100.0
+LangChain,LangChain,exact,100.0
+Heidi,Heidi,new,0.0
+Ogilvy,Ogilvy,new,0.0
+gitlab,Gitlab,exact,100.0
+diligentcorporation,Diligentcorporation,new,0.0
+diligentcorporation,Diligentcorporation,exact,100.0
+Kyra,Kyra,new,0.0
+Synthesia,Synthesia,exact,100.0
+Camunda,Camunda,new,0.0
+Camunda,Camunda,exact,100.0
+Camunda,Camunda,exact,100.0
+databricks,Databricks,exact,100.0
+mozilla,Mozilla,new,0.0
+chainguard,Chainguard,new,0.0
+nearform,Nearform,new,0.0
+wppmedia,Wppmedia,exact,100.0
+wppmedia,Wppmedia,exact,100.0
+wppmedia,Wppmedia,exact,100.0
+wppmedia,Wppmedia,exact,100.0
+Awin,Awin,new,0.0
+parloa,Parloa,new,0.0
+iwoca,Iwoca,new,0.0
+Checkout.com,Checkout Com,new,0.0
+Checkout.com,Checkout Com,exact,100.0
+Checkout.com,Checkout Com,exact,100.0
+Elevenlabs,ElevenLabs,exact,100.0
+Quantum Motion Technologies - Personio,Quantum Motion Personio,new,0.0
+wolt,Wolt,exact,100.0
+wolt,Wolt,exact,100.0
+anthropic,Anthropic,exact,100.0
+anthropic,Anthropic,exact,100.0
+anthropic,Anthropic,exact,100.0
+anthropic,Anthropic,exact,100.0
+anthropic,Anthropic,exact,100.0
+anthropic,Anthropic,exact,100.0
+anthropic,Anthropic,exact,100.0
+celonis,Celonis,exact,100.0
+grafanalabs,Grafanalabs,new,0.0
+Bitwarden,Bitwarden,new,0.0
+PHMG Careers,Phmg Careers,new,0.0
+Ping Identity,Ping Identity,new,0.0

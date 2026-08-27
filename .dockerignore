@@ -7,7 +7,6 @@ __pycache__
 .ruff_cache
 *.pyc
 *.sqlite
-out
 .env
 *.egg-info
 .DS_Store

@@ -8,3 +8,13 @@ out/
 .pytest_cache/
 .ruff_cache/
 *.egg-info/
+
+# Keep production dashboard CSV dataset tracked
+!out/
+out/*.sqlite
+!out/*.csv
+
+# Keep dashboard CSV dataset tracked
+!out/
+out/*.sqlite
+!out/*.csv
